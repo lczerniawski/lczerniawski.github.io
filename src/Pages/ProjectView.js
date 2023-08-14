@@ -9,7 +9,7 @@ import {useSpring, animated} from 'react-spring';
 
 export default function ProjectView(props) {
     let { id } = useParams();
-    const projectNames = ["E-learning platform", "Online currency exchange", "LeagueTwitchAPI"];
+    const projectNames = ["E-learning platform", "Online currency exchange"];
     const projectImages = [
         [
             process.env.PUBLIC_URL + '/studyOnline1.png',
@@ -28,16 +28,10 @@ export default function ProjectView(props) {
             process.env.PUBLIC_URL + '/kantorOnline4.png',
             process.env.PUBLIC_URL + '/kantorOnline5.png',
             process.env.PUBLIC_URL + '/kantorOnline6.png',
-        ],
-        [
-            process.env.PUBLIC_URL + '/leagueApi1.png',
-            process.env.PUBLIC_URL + '/leagueApi2.png',
-            process.env.PUBLIC_URL + '/leagueApi3.png',
-            process.env.PUBLIC_URL + '/leagueApi4.png',
         ]
     ];
-    const projectDescription = ["Polish e-learning platform.","Online Bitcoin exchange platform.", "Open source API that allows easy access to League of Legends stats for twitch.tv bots."];
-    const projectUrl = ["https://korepetycje.naucz-mnie.pl", "", "https://leaguetwitch-api.herokuapp.com"];
+    const projectDescription = ["Polish e-learning platform.","Online Bitcoin exchange platform."];
+    const projectUrl = ["https://korepetycje.naucz-mnie.pl", ""];
     const projectAbout = 
     [
         `In this project I was responsible for the backend and database. Application allows to conduct online lessons. Users have ability to register as teacher or student. 
@@ -48,17 +42,13 @@ export default function ProjectView(props) {
         `My role in this project was to implement backend server and database. I was also involved in designing UI. Application that allows you to exchange 
          Bitcoin online. Contains user management system, currency exchange settings and transactions history. Is integrated with external API enabling 
          partial automation of operations.`,
-
-         `Open source project, that allows twitch.tv streamers to provide commands for their viewers. 
-         Commands allow you to check the rank, win ratio, and mastery points on a given hero. `
     ]
     const projectTech = [
         ["C#", ".NET Core", "ASP.NET Core Web API", "ASP.NET Core Identity", "Entity Framework Core", "MSSQL Server", "Redis", "SignalR"],
         ["C#", ".NET Core", "ASP.NET Core Web API", "ASP.NET Core Identity", "Entity Framework Core", "MSSQL Server"],
-        ["C#", ".NET Core", "ASP.NET Core MVC"]
     ]
-    const projectResources = [true, false, true];
-    const githubUrl = ["", "", "https://github.com/Larenen/LeagueTwitchAPI"];
+    const projectResources = [true, false];
+    const githubUrl = ["", ""];
     const animationProps = useSpring({config: {duration: 1500}, opacity: 1, from: {opacity: 0}})
 
     useEffect(() => {

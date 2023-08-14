@@ -14,7 +14,6 @@ export default function Portfolio() {
             <div className="containerPortfolio">
                 <Thumbnail id={1} image={process.env.PUBLIC_URL + '/studyOnline-thumbnail.png'} caption="E-learning platform"/>
                 <Thumbnail id={2} image={process.env.PUBLIC_URL + '/kantorOnline-thumbnail.png'} caption="Online currency exchange"/>
-                <Thumbnail id={3} image={process.env.PUBLIC_URL + '/leagueApi-thumbnail.png'} caption="LeagueTwitchAPI"/>
             </div>
         </animated.div>
     )

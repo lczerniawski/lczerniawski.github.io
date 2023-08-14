@@ -1,3 +1,3 @@
-# larenen.github.io/
+# lczerniawski.github.io/
 
 > Portfolio to present my previous projects.

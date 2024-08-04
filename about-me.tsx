@@ -4,7 +4,7 @@ export const layout = "main_layout.tsx";
 export default (_data: Lume.Data, _helpers: Lume.Helpers) => (
 <>
   <main class="font-jost hyphens-manual">
-    <section class="p-3 my-auto mx-auto max-w-3xl bg-gray-100 rounded-2xl border-4 border-gray-700 sm:p-9 md:p-16 lg:mt-6 print:border-0 page print:max-w-letter print:max-h-letter print:mx-0 print:my-o xsm:p-8 print:bg-white md:max-w-letter md:h-letter lg:h-letter">
+    <section class="p-3 my-auto mx-auto max-w-3xl rounded-2xl sm:p-9 md:p-16 lg:mt-6 print:border-0 page print:max-w-letter print:max-h-letter print:mx-0 print:my-o xsm:p-8 print:bg-white md:max-w-letter md:h-letter lg:h-letter">
       <header class="inline-flex justify-between items-baseline mb-2 w-full align-top border-b-4 border-gray-300">
         <section class="block">
           <h1 class="mb-0 text-5xl font-bold text-gray-700">Łukasz Czerniawski</h1>
@@ -106,7 +106,7 @@ export default (_data: Lume.Data, _helpers: Lume.Helpers) => (
               </section>
             </section>
           </section>
-          <section class="pb-6 mt-0 mb-4 border-b-4 border-gray-300 first:mt-0 break-inside-avoid">
+          <section class="pb-6 mt-0 mb-4 first:mt-0 break-inside-avoid">
             <section class="break-inside-avoid">
               <h2 class="mb-2 text-lg font-bold tracking-widest text-gray-700 print:font-normal">TECHNOLOGIES</h2>
               <section class="mb-0 break-inside-avoid">

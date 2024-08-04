@@ -15,7 +15,7 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
                   <a
                     key={href}
                     href={href}
-                    className={`text-gray-600 hover:text-indigo-600 ${data.url === href ? 'font-bold text-indigo-600' : ''}`}
+                    className={`text-gray-600 hover:text-orange-600 ${data.url === href ? 'font-bold text-orange-600' : ''}`}
                   >
                     {href === '/' ? 'Home' : href === '/about-me/' ? 'About Me' : href === '/blog/' ? 'Blog' : 'Contact'}
                   </a>

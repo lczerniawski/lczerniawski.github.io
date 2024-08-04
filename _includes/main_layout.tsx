@@ -7,7 +7,7 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
         <title>{data.title}</title>
       </head>
       <body class="h-full flex flex-col items-center font-sans">
-        <header class="bg-white shadow-md p-4 w-2/6 rounded-md">
+        <header class="bg-white shadow-md p-4 lg:w-2/6 rounded-md">
           <nav class="flex justify-center items-center">
             <ul class="flex justify-around items-center space-x-4 w-full">
               {['/', '/blog/', '/about-me/', '/contact/'].map(href => (

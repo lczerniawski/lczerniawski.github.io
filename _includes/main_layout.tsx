@@ -1,5 +1,4 @@
 export default (data: Lume.Data, _helpers: Lume.Helpers) => {
-  console.log(data.url);
   return (
     <html class="h-full">
       <head>

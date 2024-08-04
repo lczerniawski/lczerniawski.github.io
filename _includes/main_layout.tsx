@@ -7,18 +7,18 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         <title>{data.title}</title>
       </head>
-      <body class="h-full font-sans">
-        <header class="bg-white shadow-md p-4">
-          <nav class="flex justify-between items-center">
-            <ul class="flex items-center space-x-4">
-              {['/', '/cv', '/blog/'].map(href => (
+      <body class="h-full flex flex-col items-center font-sans">
+        <header class="bg-white shadow-md p-4 w-2/6 rounded-md">
+          <nav class="flex justify-center items-center">
+            <ul class="flex justify-around items-center space-x-4 w-full">
+              {['/', '/blog/', '/about-me/', '/contact/'].map(href => (
                 <li>
                   <a
                     key={href}
                     href={href}
-                    className={`text-gray-600 hover:text-gray-900 ${data.url.includes(href) ? 'font-bold' : ''}`}
+                    className={`text-gray-600 hover:text-indigo-600 ${data.url === href ? 'font-bold text-indigo-600' : ''}`}
                   >
-                    {href === '/' ? 'Home' : href === '/cv' ? 'CV' : 'Blog'}
+                    {href === '/' ? 'Home' : href === '/about-me/' ? 'About Me' : href === '/blog/' ? 'Blog' : 'Contact'}
                   </a>
                 </li>
               ))}

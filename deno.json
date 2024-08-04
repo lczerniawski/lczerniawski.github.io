@@ -5,11 +5,13 @@
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "build": "deno task lume",
-    "serve": "deno task lume -s"
+    "serve": "deno task lume --serve --port=3080"
   },
   "compilerOptions": {
     "types": [
       "lume/types.ts"
-    ]
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "npm:preact"
   }
 }

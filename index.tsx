@@ -24,21 +24,21 @@ export default (_data: Lume.Data, _helpers: Lume.Helpers) => (
         </div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-slate-100 sm:text-6xl">
               Hey! I'm Łukasz
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-slate-400">
               a junior architect at AXA, an AI student, and a tech enthusiast. 
               On this site, you'll find updates on my adventures in software development, architecture, and the world of AI.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
                 href="/blog/"
-                className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+                className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-gray-900 dark:text-slate-100 shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
               >
                 Blog
               </a>
-              <a href="about-me" className="text-sm font-semibold leading-6 text-gray-900">
+              <a href="about-me" className="text-sm font-semibold leading-6 text-gray-900 dark:text-slate-400">
                 About Me <span aria-hidden="true">→</span>
               </a>
             </div>

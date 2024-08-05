@@ -12,7 +12,7 @@ const site = lume({
     }
 });
 
-site.use(jsx())
+site.use(jsx());
 site.use(tailwindcss({
     extensions: [".html", ".tsx"],
     options: {
@@ -20,9 +20,11 @@ site.use(tailwindcss({
             fontFamily: {
                 sans: ["Inter var", "sans-serif"],
             }
-        }
-    }
-}))
-site.use(postcss())
+        },
+        darkMode: "selector"
+    },
+}));
+site.use(postcss());
+site.copy("static", ".");
 
 export default site;

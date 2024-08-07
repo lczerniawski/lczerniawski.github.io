@@ -38,11 +38,10 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
         <div class="flex-grow">
           {data.children}
         </div>
-        <footer class="flex flex-col md:w-4/6 w-full">
+        <footer class="flex flex-col md:w-4/6 w-5/6">
           <hr class="border-gray-600 dark:border-slate-100" />
           <p class="w-full text-center my-6 text-gray-900 dark:text-slate-100">
-            © 2024 Łukasz Czerniawski. Powered by{" "}
-            <a href="https://lume.land/">🔥Lume</a>
+            © 2024 Łukasz Czerniawski <br class="md:hidden"/> Powered by <a href="https://lume.land/">🔥Lume</a>
           </p>
         </footer>
         <button

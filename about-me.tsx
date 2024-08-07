@@ -7,7 +7,7 @@ export default (_data: Lume.Data, _helpers: Lume.Helpers) => (
     <section class="p-3 my-auto mx-auto max-w-3xl rounded-2xl sm:p-9 md:p-16 lg:mt-6 print:border-0 page print:max-w-letter print:max-h-letter print:mx-0 print:my-o xsm:p-8 print:bg-white md:max-w-letter md:h-letter lg:h-letter">
       <header class="inline-flex justify-between items-baseline mb-2 w-full align-top border-b-4 border-gray-300">
         <section class="block">
-          <h1 class="mb-0 text-5xl font-bold text-gray-900 dark:text-slate-100">Łukasz Czerniawski</h1>
+          <h1 class="mb-0 text-5xl font-bold text-gray-900 dark:text-slate-100 sm:text-6xl">Łukasz Czerniawski</h1>
           <h2 class="m-0 ml-2 text-2xl font-semibold text-gray-900 dark:text-slate-100 leading-snugish">Junior Architect</h2>
           <h3 class="m-0 mt-2 ml-2 pb-7 text-xl font-semibold text-gray-600 dark:text-slate-400 leading-snugish">Gdynia, Poland</h3>
         </section>

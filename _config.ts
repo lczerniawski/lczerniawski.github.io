@@ -3,6 +3,8 @@ import expires from "lume/middlewares/expires.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
 import postcss from "lume/plugins/postcss.ts";
+import typography from "npm:@tailwindcss/typography";
+
 
 const site = lume({
     server: {
@@ -21,7 +23,8 @@ site.use(tailwindcss({
                 sans: ["Inter var", "sans-serif"],
             }
         },
-        darkMode: "selector"
+        darkMode: "selector",
+        plugins: [typography],
     },
 }));
 site.use(postcss());

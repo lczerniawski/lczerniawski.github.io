@@ -101,6 +101,9 @@ export default (_data: Lume.Data, _helpers: Lume.Helpers) => (
                     <li class="p-1.5 mb-1 leading-relaxed text-slate-100 bg-gray-800 dark:text-gray-900 dark:bg-slate-100 mr-1.6 print:bg-white print:border-inset">
                         <a class="block" href="https://www.datacamp.com/certificate/DEA0017926458443">Data Engineer Associate</a>
                     </li>
+                    <li class="p-1.5 mb-1 leading-relaxed text-slate-100 bg-gray-800 dark:text-gray-900 dark:bg-slate-100 mr-1.6 print:bg-white print:border-inset">
+                        <a class="block" href="https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/4f4b811f-1653-45af-942c-5ac5e3c4bdcc-ukasz-czerniawski-724429d0-b98f-4e5f-b80c-3d710d652f40-certificate.pdf">FINOS Financial Services Open Source Developer</a>
+                    </li>
                   </ul>
                 </section>
               </section>

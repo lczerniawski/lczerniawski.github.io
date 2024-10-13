@@ -1,8 +1,10 @@
 function toggleTheme() {
     if (localStorage.getItem("theme") === "light") {
         localStorage.setItem("theme", "dark");
+        window.dispatchEvent(new Event('changeTheme'))
     } else {
         localStorage.setItem("theme", "light");
+        window.dispatchEvent(new Event('changeTheme'))
     }
 
     initializeTheme();

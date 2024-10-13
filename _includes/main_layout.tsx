@@ -6,11 +6,12 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         <script src="/scripts.js"></script>
         <title>{data.title}</title>
       </head>
       <body class="h-full flex flex-col items-center font-sans dark:bg-gray-900">
-        <header class="bg-white dark:bg-gray-800 shadow-md p-4 lg:w-2/6 rounded-md">
+        <header class="bg-white md:text-xl text-md dark:bg-gray-800 shadow-md p-4 lg:w-3/6 rounded-md">
           <nav class="flex justify-center items-center">
             <ul class="flex justify-around items-center space-x-4 w-full">
               {["/", "/blog/", "/about-me/", "/contact/"].map((href) => (

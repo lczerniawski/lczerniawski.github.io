@@ -58,7 +58,7 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
           function loadUtterances(theme) {
             const script = document.createElement('script');
             script.src = 'https://utteranc.es/client.js';
-            script.setAttribute('repo', 'lczerniawski/lczerniawski');
+            script.setAttribute('repo', 'lczerniawski/lczerniawski.github.io');
             script.setAttribute('issue-term', 'pathname');
             script.setAttribute('theme', theme);
             script.crossOrigin = 'anonymous';

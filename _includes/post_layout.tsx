@@ -9,7 +9,11 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
       <article class="prose dark:prose-invert mt-10">
         {data.children}
       </article>
-      <p className="text-center text-xl font-bold tracking-tight text-gray-900 dark:text-slate-100 mt-10 border-t border-gray-600 dark:border-slate-100 pt-2 pb-5">
+      <div class="flex flex-col items-end justify-end">
+        <span id="visits" class="font-bold text-gray-900 dark:text-slate-100 mr-1">0</span>
+        <div class="text-sm text-gray-600 dark:text-slate-400">Visits</div>
+      </div>
+      <p className="text-center text-xl font-bold tracking-tight text-gray-900 dark:text-slate-100 border-t border-gray-600 dark:border-slate-100 pt-2 pb-5">
         If you enjoyed this post, please share it with your friends!
       </p>
       <div class="flex items-center justify-center gap-6 mb-5">
@@ -70,6 +74,14 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
 
           document.addEventListener('DOMContentLoaded', function() {
             const currentUrl = window.location.href;
+          
+            fetch(\`https://api.counterapi.dev/v1/${data.basename}lczerniawski/visits/up\`)
+              .then(response => response.json())
+              .then(data => {
+                document.getElementById('visits').innerText = data.count;
+              })
+              .catch(error => console.error('Error fetching visit count:', error));
+
             const linkedinShareLink = document.getElementById('linkedin-share');
             linkedinShareLink.href = \`https://www.linkedin.com/sharing/share-offsite/?url=\${currentUrl}\`;
 

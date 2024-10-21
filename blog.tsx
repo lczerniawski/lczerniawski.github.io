@@ -12,7 +12,7 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
                 {posts.map((post) => (
                     <article class="flex max-w-xl flex-col items-start justify-between">
                         <img
-                            class="rounded-md w-80 h-64 mb-8"
+                            class="mx-auto rounded-md w-80 h-64 mb-8"
                             src={post.imageSrc}
                         >
                         </img>

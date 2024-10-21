@@ -12,8 +12,13 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
                 {posts.map((post) => (
                     <article class="flex max-w-xl flex-col items-start justify-between">
                         <img
-                            class="mx-auto rounded-md w-80 h-64 mb-8"
-                            src={post.imageSrc}
+                            class="mx-auto rounded-md w-80 h-64 mb-8 dark:hidden"
+                            src={post.imageLightSrc}
+                        >
+                        </img>
+                        <img
+                            class="mx-auto rounded-md w-80 h-64 mb-8 hidden dark:block"
+                            src={post.imageDarkSrc}
                         >
                         </img>
                         <div class="flex items-center gap-x-4 text-xs">

@@ -20,7 +20,7 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
                     key={href}
                     href={href}
                     className={`text-gray-600 dark:text-slate-100 hover:text-orange-600 ${
-                      data.url === href ? "font-bold !text-orange-600" : ""
+                      data.url === href || (href !== "/" && data.url.includes(href)) ? "font-bold !text-orange-600" : ""
                     }`}
                   >
                     {href === "/"

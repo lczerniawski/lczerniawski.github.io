@@ -8,7 +8,7 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-slate-100 sm:text-6xl text-center mt-10">
                 Blog
             </h1>
-            <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-600 dark:border-slate-100 pt-10 sm:mt-10 sm:pt-10 lg:pr-10 lg:pl-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+            <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-600 dark:border-slate-100 pt-10 p-3 mt-3 sm:mt-10 sm:pt-10 lg:pr-10 lg:pl-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                 {posts.map((post) => (
                     <article class="flex max-w-xl flex-col items-start justify-between">
                         <img
@@ -22,7 +22,7 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
                         >
                         </img>
                         <div class="flex items-center gap-x-4 text-xs">
-                            <time datetime="2020-03-16" class="text-gray-500 dark:text-slate-200">
+                            <time class="text-gray-500 dark:text-slate-200">
                                 {post.date.toLocaleDateString("en-US", {
                                     month: "long",
                                     day: "numeric",

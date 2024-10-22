@@ -3,7 +3,14 @@ export const layout = "main_layout.tsx";
 export default (data: Lume.Data, _helpers: Lume.Helpers) => {
   return (
     <>
-      <h1 className="text-5xl font-bold tracking-tight text-gray-900 dark:text-slate-100 text-center mt-10 border-b border-gray-600 dark:border-slate-100 pb-10">
+      <time class="text-gray-500 dark:text-slate-200 mt-5 block text-right">
+          {data.date.toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+          })}
+      </time>
+      <h1 className="text-5xl font-bold tracking-tight text-gray-900 dark:text-slate-100 mt-5 text-center border-b border-gray-600 dark:border-slate-100 pb-10">
         {data.articleTitle}
       </h1>
       <article class="prose dark:prose-invert md:mx-auto mt-10 ml-10 mr-10">

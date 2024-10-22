@@ -5,3 +5,9 @@
 pre {
   white-space: pre-wrap;
 }
+
+@media screen and (max-width: 640px) {
+  pre:has(.hljs) {
+    width: 90vw;
+  }
+}

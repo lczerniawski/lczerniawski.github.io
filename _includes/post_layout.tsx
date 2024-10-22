@@ -3,24 +3,24 @@ export const layout = "main_layout.tsx";
 export default (data: Lume.Data, _helpers: Lume.Helpers) => {
   return (
     <>
-      <time class="text-gray-500 dark:text-slate-200 mt-5 block text-right">
+      <time class="text-gray-500 dark:text-slate-200 mt-5 block text-right w-screen sm:w-full pr-3 lg:pr-0">
           {data.date.toLocaleDateString("en-US", {
               month: "long",
               day: "numeric",
               year: "numeric",
           })}
       </time>
-      <h1 className="text-5xl font-bold tracking-tight text-gray-900 dark:text-slate-100 mt-5 text-center border-b border-gray-600 dark:border-slate-100 pb-10">
+      <h1 className="text-5xl font-bold tracking-tight text-gray-900 dark:text-slate-100 mt-5 text-center border-b border-gray-600 dark:border-slate-100 pb-10 mr-5 ml-5 lg:mr-0 lg:ml-0">
         {data.articleTitle}
       </h1>
       <article class="prose dark:prose-invert md:mx-auto mt-10 ml-10 mr-10">
         {data.children}
       </article>
-      <div class="flex flex-col items-end justify-end">
+      <div class="flex flex-col items-end justify-end w-screen sm:w-full pr-6 lg:pr-0">
         <span id="visits" class="font-bold text-gray-900 dark:text-slate-100 mr-1">0</span>
         <div class="text-sm text-gray-600 dark:text-slate-400">Visits</div>
       </div>
-      <p className="text-center text-xl font-bold tracking-tight text-gray-900 dark:text-slate-100 border-t border-gray-600 dark:border-slate-100 pt-2 pb-5">
+      <p className="text-center text-xl font-bold tracking-tight text-gray-900 dark:text-slate-100 border-t border-gray-600 dark:border-slate-100 pt-2 pb-5 mr-6 ml-6 lg:mr-0 lg:ml-0">
         If you enjoyed this post, please share it with your friends!
       </p>
       <div class="flex items-center justify-center gap-6 mb-5">

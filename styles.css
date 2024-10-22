@@ -8,6 +8,14 @@ pre {
 
 @media screen and (max-width: 640px) {
   pre:has(.hljs) {
+    width: 75vw;
+  }
+
+  .utterances {
     width: 90vw;
+  }
+
+  .utterances-container {
+    max-width: 90vw;
   }
 }

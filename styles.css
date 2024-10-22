@@ -7,8 +7,9 @@ pre {
 }
 
 @media screen and (max-width: 640px) {
-  pre:has(.hljs) {
+  pre {
     width: 75vw;
+    margin: 0 auto;
   }
 
   .utterances {

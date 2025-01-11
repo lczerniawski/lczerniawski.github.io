@@ -5,6 +5,7 @@ description: "In recent years, backend development has taken a turn into system 
 imageLightSrc: "/rust-vs-swift/swift_logo.svg"
 imageDarkSrc: "/rust-vs-swift/swift_logo.svg"
 tags: ["Programming", "Backend", "Rust", "Swift"]
+date: "2025-01-11"
 ---
 
 In recent years, backend development has taken a turn into system programming languages as demand grows for scale and performance. This trend has mostly been led by Go or, in recent years, Rust. Yet there might be one more alternative that still waits to shine.

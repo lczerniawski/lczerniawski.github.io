@@ -21,7 +21,7 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
                             src={post.imageDarkSrc}
                         >
                         </img>
-                        <div class="flex items-center gap-x-4 text-xs">
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
                             <time class="text-gray-500 dark:text-slate-200">
                                 {post.date.toLocaleDateString("en-US", {
                                     month: "long",

@@ -5,6 +5,7 @@ description: "This post is a quick introduction to genetic algorithms. I will de
 imageLightSrc: "/genetic-algo/workflow-light.svg"
 imageDarkSrc: "/genetic-algo/workflow-dark.svg"
 tags: ["AI", "ML", "Algorithms"]
+date: "2024-10-22"
 ---
 
 This post is a quick introduction to genetic algorithms. I will describe all the steps required for such an algorithm to work, explain concepts, and show an example of implementation in Python.

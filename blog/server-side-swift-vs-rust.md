@@ -2,8 +2,8 @@
 title: "Łukasz's Corner - Beyond Rust: Exploring Swift for High-Performance Backend Services"
 articleTitle: "Beyond Rust: Exploring Swift for High-Performance Backend Services"
 description: "In recent years, backend development has taken a turn into system programming languages as demand grows for scale and performance. This trend has mostly been led by Go or, in recent years, Rust. Yet there might be one more alternative that still waits to shine."
-imageLightSrc: "/rust-vs-swift/swift_logo.png"
-imageDarkSrc: "/rust-vs-swift/swift_logo.png"
+imageLightSrc: "/rust-vs-swift/swift_logo.svg"
+imageDarkSrc: "/rust-vs-swift/swift_logo.svg"
 tags: ["Programming", "Backend", "Rust", "Swift"]
 ---
 

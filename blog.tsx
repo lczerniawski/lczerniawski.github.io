@@ -39,7 +39,7 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
                             <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 dark:text-slate-100 group-hover:text-gray-600 dark:group-hover:text-slate-400">
                                 <a href={post.url}>
                                     <span class="absolute inset-0"></span>
-                                    {post.title}
+                                    {post.articleTitle}
                                 </a>
                             </h3>
                             <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600 dark:text-slate-100">

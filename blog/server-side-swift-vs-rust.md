@@ -10,9 +10,9 @@ tags: ["Programming", "Backend", "Rust", "Swift"]
 In recent years, backend development has taken a turn into system programming languages as demand grows for scale and performance. This trend has mostly been led by Go or, in recent years, Rust. Yet there might be one more alternative that still waits to shine.
 
 ## Why consider alternatives?
-A recent trend is to rewrite everything to Rust. Don’t get me wrong, Rust is a great language with great performance and memory safety, but there is one caveat with using Rust. It is language complexity and its steep learning curve. For someone transitioning from a higher-level language, it might not be so easy to grasp what Rust is about quickly, moreover, if you have several people that you want to transit into this new world, it might be even harder.
+Don’t get me wrong, Rust is a great language with great performance and memory safety, but there is one caveat with using Rust. It is language complexity and its steep learning curve. For someone transitioning from a higher-level language, it might not be so easy to grasp what Rust is about quickly, not to mention the whole team that needs to transition.
 
-One prominent language that is often skipped when considering performance is Swift. I know that it is supposed to be “Apple only”, but in recent years, there has been a growing movement not only from the community but also from Apple to make Swift a great language on the server side, and that’s what I want to show you today.With its concise syntax, memory management model, and growing support, it is a tempting alternative.
+One prominent language that is often skipped when considering performance is Swift. I know that it was “Apple only”, but in recent years, there has been a growing movement not only from the community but also from Apple to make Swift a language on the server side of things, and that’s what I want to show you today. With its concise syntax, memory management model, and growing support, it is a tempting alternative.
 
 ## High-Level Comparison of Rust and Swift in Backend Contexts
 
@@ -23,20 +23,16 @@ Rust and Swift provide great performance, but how they handle memory is differen
 Rust relies on ownership and borrowing rules, making it safe but hard to master. On the other hand, with its actor model, Swift aims to be easy and secure.
 
 ### Performance vs Control
-
 While Rust provides more precise control over memory, Swift provides a more balanced approach with just enough details without compromising too much on performance.
 
 ### DevEx
-
 Rust may feel complex with its compile-time checks targeting high correctness. Swift, on the other hand, is designed to be more approachable.
 
 ## Rust in the backend development
-
-Before diving deeper into Swift and why I consider it a nice alternative to Rust, first, I would like to bring closer to why Rust is so successful on the backend.
+Before diving deeper into Swift and why I consider it a nice alternative to Rust, first, I would like to discuss why Rust is so successful on the backend.
 
 ### Memory Safety
-
-First, of course, is the much-desired memory safety. Rust doesn't use a garbage collector instead, it enforces strict rules for ownership and borrowing that ensure safety on runtime.
+First, of course, is the much-desired memory safety. Rust doesn't use a garbage collector. Instead, it enforces strict rules for ownership and borrowing that ensure safety on runtime.
 
 ```rust
 fn main() {
@@ -56,11 +52,11 @@ If we try to run the following code snippet, it will result in the following err
 
 <img class="mx-auto" src="/rust-vs-swift/rust_borrow_checker_example.png" alt="Rust Borrow Checker Example"/>
 
-In short, it is because we try to use the ‘s1’ variable, which was moved into the scope of the function in the main scope. Of course, from our perspective, it is a simple operation that we, as programmers, know will not cause any issues. But in specific scenarios, such code could lead to race conditions, so Rust’s strict rules make sure that it is not possible in all cases.  
+In short, it is because we try to use the ‘s1’ variable, which was moved into the scope of the 'calculate_length' function in the main scope. Of course, from our perspective, it is a simple operation that we, as programmers, know will not cause any issues. But in specific scenarios, such code could lead to race conditions, so Rust’s strict rules make sure that it is not possible in all cases.  
 
 ### Performance and Zero-Cost Abstractions
 
-Rust compiles o machine code, which leads to performance similar to C/C++ level. Zero-cost abstraction means that even if we write high-level code with a lot of syntactic sugar, performance is not sacrificed.
+Rust compiles to machine code, which leads to performance similar to C/C++ level. Zero-cost abstraction means that writing high-level code with a lot of syntactic sugar doesn't sacrifice performance.
 
 <img class="mx-auto" src="/rust-vs-swift/mandelbrot_rust_cpp.png" alt="Rust Borrow Checker Example"/>
 
@@ -68,7 +64,7 @@ Rust compiles o machine code, which leads to performance similar to C/C++ level.
 
 ### Concurrency
 
-In today’s world, where a lot of applications are created with highly concurrent environments in mind, Rust, with its ownership rules, thrives. It helps to make sure that data race chances are minimised when processing parallel a high volume of requests.
+In today’s world, where a lot of applications are created with highly concurrent environments in mind, Rust, with its ownership rules, thrives. It helps to make sure that data race chances are minimised when processing in parallel a high volume of requests.
 
 ### Use cases
 Even though I will be mainly talking about Rust from a backend development perspective, it is also worth mentioning other use cases, for which Rust is a popular choice. 
@@ -96,11 +92,11 @@ What’s interesting though is the comparison to Go, which is also highly popula
 
 [Benchmark source](https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/swift-go.html)
 
-As you can see, swift can be up to two times faster! Behind this performance, of course, stands the fact that Swift is compiled to native machine code. 
+As you can see, swift can be up to two and a half times faster! Behind this performance, of course, stands the fact that Swift is compiled to native machine code.
 
 ### Memory Management with ARC
 
-For memory management, a swift leverage system is called automatic reference counting (ARC). It automatically handles memory management by keeping count of references to objects. When the count hits zero, the object is deallocated. This approach is a nice balance between simplicity and performance, as, in general, programmers need zero knowledge of how this mechanism works under the hood, yet we still achieve low latency as memory is released as soon as reference go out of scope, without garbage collector pause.
+For memory management, a swift leverage system that is called automatic reference counting (ARC). It automatically handles memory management by keeping count of references to objects. When the count hits zero, the object is deallocated. This approach is a nice balance between simplicity and performance, as, in general, programmers need zero knowledge of how this mechanism works under the hood, yet we still achieve low latency as memory is released as soon as reference go out of scope, without garbage collector pause.
 
 ```swift
 class Person {
@@ -136,13 +132,13 @@ Here is an example that shows how ARC works in practice: we create an object and
 
 ### Concurrency Model
 
-Swift leverages async/await, which is pretty much standard these days in all languages but is essential for high-performance services, as it is a lot easier to read and write code that looks synchronous rather than use a lot of nesting. The real power of Swift for concurrency lies in an Actor Model.
+Swift leverages async/await, which is pretty much standard these days in all languages and is essential for high-performance services, as it is a lot easier to read and write code that looks synchronous rather than use a lot of nesting. Yet the real power of Swift in concurrency lies in an Actor Model.
 
 #### Actor Model
-It is a concurrency paradigm designed to manage access to shared mutable objects safely with concurrency. It was introduced to simplify writing concurrent code by also keeping the state safe from data races. The actor model has the following properties:
+It is a concurrency paradigm designed to manage access to shared mutable objects safely in a multi-threaded environment. It was introduced to simplify writing concurrent code by also keeping the state safe from data races. The actor model has the following properties:
 
 - State Encapsulation – the actor is, in fact, a reference type that by itself protects its own mutable state, ensuring that only one task at the time can access its data.
-- Concurrency Safety – All methods exposed by the Actor are asynchronous by default, so the calling code needs to await them. This property makes sure that not a single call is blocking and ensures that only one task accesses its data.
+- Concurrency Safety – All methods exposed by the actor are asynchronous by default, so the calling code needs to await them. This property makes sure that not a single call is blocking and ensures that only one task accesses its data.
 - Task Serialization – tasks that are sent to the actor are executed in a queue, one task at a time. 
 - Isolation of Shared State – A shared state is isolated from concurrent access, making the actor model ideal for managing shared resources.
 
@@ -184,7 +180,8 @@ Here, the simple example shows how an actor can be created and leveraged, as you
 
 #### Sendable Protocol
 
-The second part of what makes Swift concurrency great is the Sendable protocol, and this one is like what we have in Rust. It allows you to mark types that can be safely passed through different concurrency domains, such as tasks or threads. Even though Rust possesses a similar mechanism, I would like to expand on the different properties that Sendable give us.
+The second part of what makes Swift concurrency great is the Sendable protocol, and this one is similar to what we have in Rust.
+ It allows you to mark types that can be safely passed through different concurrency domains, such as tasks or threads. Even though Rust possesses a similar mechanism, I would like to expand on the different properties that Sendable give us.
 - Thread Safety – if the type conforms to the protocol, it guarantees that it is safe to pass it through different contexts.
 - Automatic Conformance – Many standard Swift types automatically conform to the Sendable protocol. Additionally, it automatically derives conformance for structs and classes if all their properties are also Sendable.
 - Custom Types – If your custom type contains properties that are not Sendable, you must explicitly adopt the protocol and ensure proper synchronisation when accessing those from multiple threads.
@@ -260,7 +257,7 @@ struct MyApp {
 ```
 
 ### Developer Friendly Syntax
-Lastly, I think (even though I have written more Rust code than Swift) that Swift has a nice syntax that is more developer-friendly and easier to grasp for everyone. Let’s take a look at the example of loading file content and printing it.
+Lastly, I think (even though I have written more Rust code than Swift) that Swift has a nicer syntax that is more developer-friendly and easier to grasp for everyone. Let’s take a look at the example of loading file content and printing it.
 
 #### Swift
 ```swift
@@ -291,43 +288,43 @@ fn main() -> io::Result<()> {
 }
 ```
 
-As you can see, swift can be read as plain English, whereas in the case of Rust, there are a lot of keywords, special characters and noise that make the example harder to understand.
+As you can see, Swift can be read almost as plain English, whereas in the case of Rust, there are a lot of keywords, special characters and noise that make the example harder to understand.
 
 ## Swift Backend Ecosystem
-I hope that these few arguments convinced you that Swift is indeed an interesting language, and it is more than just “Apple language”, and it can’t be used for much more than only Apple platforms. Now, I want to bring you closer to the Swift backend ecosystem.
+I hope that these few arguments convinced you that Swift is indeed an interesting language, and it is more than just “Apple language”, and it can’t be used for much more than just Apple platforms. Now, I want to bring you closer to the Swift backend ecosystem.
 
-### Swift Server Workgroup (SSWG)
+### [Swift Server Workgroup (SSWG)](https://www.swift.org/sswg/)
 Founded by Apple, it plays an active role in growing Swift for backend development. It is responsible for some of the core projects that allow for using Swift on the backend.
 
 Additionally, this year at WWDC, Apple finally “admitted” the fact that Server Side Swift is a thing by releasing [this short presentation](https://www.youtube.com/watch?v=OWNjtWUb9bs) on that topic.
 
-### Packages
+### [Packages](https://swiftpackageindex.com/keywords/server-side-swift)
 <img class="mx-auto" src="/rust-vs-swift/packages.png" alt="Swift Server Side Packages"/>
 
 Swift’s package manager (SPM) and growing community resources make it easy to find and use backend-related packages. 
 
 ### Key Frameworks
-Several frameworks exist that allow for quick and easy creation of backend services in Swift. Today, I want to discuss one that is core to all other frameworks and the two most popular ones for this day.
+Several frameworks exist that allow for quick and easy creation of backend services in Swift. I will bring you closer to one that is core to all other frameworks and the two most popular ones for this day.
 
-#### SwiftNIO
+#### [SwiftNIO](https://github.com/apple/swift-nio)
 Developed by Apple, SwiftNIO is a low-level framework for asynchronous network applications. Providing an event-driven, non-blocking architecture, SwiftNIO is the core networking engine for frameworks like Vapor and Hummingbird. It’s also a powerful tool for developers to build custom high-performance servers or protocol-specific applications from scratch.
 
-#### Vapor
+#### [Vapor](https://vapor.codes/)
 <img class="mx-auto" src="/rust-vs-swift/vapor.png" alt="Vapor webpage"/>
 One of the first and the most widely used server-side Swift framework. Vapor is designed for building high-performance web applications and APIs. It provides routing, middleware, templating, and database integrations (e.g., Fluent ORM), making it a great choice for full-stack development with Swift.
 
-#### Hummingbird
+#### [Hummingbird](https://hummingbird.codes/)
 <img class="mx-auto" src="/rust-vs-swift/hummingbird.png" alt="Hummingbird webpage"/>
-The youngest, lightweight Swift framework is built on top of SwiftNIO. Hummingbird is ideal for developers seeking more control over their server architecture. It can be compared to ExpressJS in the JS ecosystem. Its modular approach allows developers to pick and choose the components they need, making it highly customizable.
+A young, lightweight Swift framework that is built on top of SwiftNIO. Hummingbird is ideal for developers seeking more control over their server architecture. It can be compared to ExpressJS in the JS ecosystem. Its modular approach allows developers to pick and choose the components they need, making it highly customizable.
 
 ### Databases Support
-The most popular database driver is Fluent. It is an ORM (Object-Relational Mapping) library built for Vapor, supporting databases like MySQL, PostgreSQL, SQLite, and MongoDB. Fluent provides a way to define models and manage migrations additionally, it can be incorporated into other frameworks (e.g. Hummingbird). Additionally, Swift’s backend ecosystem also includes libraries for databases such as Redis, SQLite, PostgreSQL, and MongoDB.
+The most popular database driver is [Fluent](https://docs.vapor.codes/fluent/overview/). It is an ORM (Object-Relational Mapping) library built for Vapor, supporting databases like MySQL, PostgreSQL, SQLite, and MongoDB. Fluent provides a way to define models and manage migrations, it can also be incorporated into other frameworks (e.g. Hummingbird). Additionally, Swift’s backend ecosystem also includes libraries for databases such as Redis, SQLite, PostgreSQL, and MongoDB.
 
 ### Cross-Platform Compatibility 
 As said, these days Swift is much more than only Apple platforms language, it is finally cross-platform. It is fully compatible with Linux, which allows applications to be hosted on popular cloud platforms like AWS, Google Cloud, and Azure, where Linux is the standard for backend environments. Apple has also expanded support to Windows, opening opportunities for cross-platform development where both Linux and Windows are used. This compatibility is mostly valuable for people who use Windows as their daily operating system.
 
 ### Deployment
-Swift can be easily deployed to any cloud provider not only as a binary on Linux but also it can be containerized. Apple provides Pre-built Swift images that can be found on Docker Hub, making it straightforward to prepare such containers.
+Swift can be easily deployed to any cloud provider not only as a binary on Linux but also it can be containerized. Apple provides pre-built Swift images that can be found on [Docker Hub](https://hub.docker.com/_/swift/), making it straightforward to prepare such containers.
 
 ## Conclusions
 I hope this post made you curious about Swift in the context of backend services development, and next time when you will be evaluating what technology to use for your blazing-fast application, Swift will be on that list ;).

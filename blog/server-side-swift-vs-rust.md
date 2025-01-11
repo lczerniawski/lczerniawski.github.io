@@ -135,3 +135,199 @@ reference3 = nil
 Here is an example that shows how ARC works in practice: we create an object and assign it to three different variables. Only after the last reference is set to nil, the object is deallocated as soon as it is set.
 
 ### Concurrency Model
+
+Swift leverages async/await, which is pretty much standard these days in all languages but is essential for high-performance services, as it is a lot easier to read and write code that looks synchronous rather than use a lot of nesting. The real power of Swift for concurrency lies in an Actor Model.
+
+#### Actor Model
+It is a concurrency paradigm designed to manage access to shared mutable objects safely with concurrency. It was introduced to simplify writing concurrent code by also keeping the state safe from data races. The actor model has the following properties:
+
+- State Encapsulation – the actor is, in fact, a reference type that by itself protects its own mutable state, ensuring that only one task at the time can access its data.
+- Concurrency Safety – All methods exposed by the Actor are asynchronous by default, so the calling code needs to await them. This property makes sure that not a single call is blocking and ensures that only one task accesses its data.
+- Task Serialization – tasks that are sent to the actor are executed in a queue, one task at a time. 
+- Isolation of Shared State – A shared state is isolated from concurrent access, making the actor model ideal for managing shared resources.
+
+```swift
+actor Counter {
+    private var value: Int = 0 // State is private to the actor
+
+    // Method to increment the counter
+    func increment() {
+        value += 1
+    }
+
+    // Method to retrieve the current value
+    func getValue() -> Int {
+        return value
+    }
+}
+
+@main
+struct ActorExample {
+    static func main() async {
+        let counter = Counter()
+
+        // Create concurrent tasks to increment the counter
+        await withTaskGroup(of: Void.self) { group in
+            for _ in 1...100 {
+                group.addTask {
+                    await counter.increment()
+                }
+            }
+        }
+
+        let finalValue = await counter.getValue()
+        print("Final counter value: \(finalValue)")
+    }
+}
+```
+Here, the simple example shows how an actor can be created and leveraged, as you can see, methods require the ‘await’ keyword even though in the Actor declaration, ‘async’ keyword is not mentioned anywhere explicitly.
+
+#### Sendable Protocol
+
+The second part of what makes Swift concurrency great is the Sendable protocol, and this one is like what we have in Rust. It allows you to mark types that can be safely passed through different concurrency domains, such as tasks or threads. Even though Rust possesses a similar mechanism, I would like to expand on the different properties that Sendable give us.
+- Thread Safety – if the type conforms to the protocol, it guarantees that it is safe to pass it through different contexts.
+- Automatic Conformance – Many standard Swift types automatically conform to the Sendable protocol. Additionally, it automatically derives conformance for structs and classes if all their properties are also Sendable.
+- Custom Types – If your custom type contains properties that are not Sendable, you must explicitly adopt the protocol and ensure proper synchronisation when accessing those from multiple threads.
+- Isolation – Swift guarantees that the Sendable instance will not be modified when passed to another task, thus avoiding data races.
+
+```swift
+// Define a struct that conforms to Sendable
+struct Point: Sendable {
+    var x: Int
+    Var y: Int
+}
+
+func performConcurrentWork(point: Point) async {
+    // Simulating some work with the point
+    print("Processing point: (\(point.x), \(point.y))")
+}
+
+@main
+struct MyApp {
+    static func main() async {
+        let point = Point(x:10, y:20)
+
+        // Call the async function with a Sendable point
+        await performConcurrentWork(point: point)
+    }
+}
+```
+
+### Low-Level Control
+Similar to Rust, Swift has some mechanisms that allow for more low-level control. 
+
+#### Direct Memory Access
+Swift provides low-level tools like unsafe pointers, which bypasses ARC for fine-grained memory management. It is also possible to use inlined assembly to interact with CPU-specific features, enabling hardware optimisations (though, for now, it is only available for Apple CPUs).
+
+```swift
+func directMemoryExample() {
+    let size = 3
+    let pointer = UnsafeMutablePointer<Int>.allocate(capacity: size)
+    pointer.initialize(to: 42, count: size)
+
+    for i in 0..<size {
+        pointer[i] = i * 10 // Directly manipulate memory
+        print("Value at index \(i): \(pointer[i])")
+    }
+
+    pointer.deinitialize(count: size)
+    pointer.deallocate()
+}
+
+@main
+struct MyApp {
+    static func main() async {
+        directMemoryExample()
+    }
+}
+```
+
+#### Interfacing with C libraries
+Swift can interoperate with C libraries, allowing to use of existing C code for critical performance paths.
+
+```swift
+func calculateHypotenuse(a: Double, b: Double) -> Double {
+    return hypot(a, b) // Calls c library function
+}
+
+@main
+struct MyApp {
+    static func main() async {
+        let hypotenuse = calculateHypotenuse(a: 3.0, b: 4.0)
+        print("Hypotenuse: \(hypotenuse)")
+    }
+}
+```
+
+### Developer Friendly Syntax
+Lastly, I think (even though I have written more Rust code than Swift) that Swift has a nice syntax that is more developer-friendly and easier to grasp for everyone. Let’s take a look at the example of loading file content and printing it.
+
+#### Swift
+```swift
+@main
+struct MyApp {
+    static func main() async {
+        do {
+            let contents = try String(contentsOfFile: "file.txt")
+            print(contents)
+        } catch {
+            print("Error reading file: \(error))
+        }
+    }
+}
+```
+
+#### Rust
+```rust
+use std::fs::File;
+use std::io::{self, Read};
+
+fn main() -> io::Result<()> {
+    let mut file = File::open("file.txt")?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+    println!("{}", contents);
+    Ok(())
+}
+```
+
+As you can see, swift can be read as plain English, whereas in the case of Rust, there are a lot of keywords, special characters and noise that make the example harder to understand.
+
+## Swift Backend Ecosystem
+I hope that these few arguments convinced you that Swift is indeed an interesting language, and it is more than just “Apple language”, and it can’t be used for much more than only Apple platforms. Now, I want to bring you closer to the Swift backend ecosystem.
+
+### Swift Server Workgroup (SSWG)
+Founded by Apple, it plays an active role in growing Swift for backend development. It is responsible for some of the core projects that allow for using Swift on the backend.
+
+Additionally, this year at WWDC, Apple finally “admitted” the fact that Server Side Swift is a thing by releasing [this short presentation](https://www.youtube.com/watch?v=OWNjtWUb9bs) on that topic.
+
+### Packages
+<img class="mx-auto" src="/rust-vs-swift/packages.png" alt="Swift Server Side Packages"/>
+
+Swift’s package manager (SPM) and growing community resources make it easy to find and use backend-related packages. 
+
+### Key Frameworks
+Several frameworks exist that allow for quick and easy creation of backend services in Swift. Today, I want to discuss one that is core to all other frameworks and the two most popular ones for this day.
+
+#### SwiftNIO
+Developed by Apple, SwiftNIO is a low-level framework for asynchronous network applications. Providing an event-driven, non-blocking architecture, SwiftNIO is the core networking engine for frameworks like Vapor and Hummingbird. It’s also a powerful tool for developers to build custom high-performance servers or protocol-specific applications from scratch.
+
+#### Vapor
+<img class="mx-auto" src="/rust-vs-swift/vapor.png" alt="Vapor webpage"/>
+One of the first and the most widely used server-side Swift framework. Vapor is designed for building high-performance web applications and APIs. It provides routing, middleware, templating, and database integrations (e.g., Fluent ORM), making it a great choice for full-stack development with Swift.
+
+#### Hummingbird
+<img class="mx-auto" src="/rust-vs-swift/hummingbird.png" alt="Hummingbird webpage"/>
+The youngest, lightweight Swift framework is built on top of SwiftNIO. Hummingbird is ideal for developers seeking more control over their server architecture. It can be compared to ExpressJS in the JS ecosystem. Its modular approach allows developers to pick and choose the components they need, making it highly customizable.
+
+### Databases Support
+The most popular database driver is Fluent. It is an ORM (Object-Relational Mapping) library built for Vapor, supporting databases like MySQL, PostgreSQL, SQLite, and MongoDB. Fluent provides a way to define models and manage migrations additionally, it can be incorporated into other frameworks (e.g. Hummingbird). Additionally, Swift’s backend ecosystem also includes libraries for databases such as Redis, SQLite, PostgreSQL, and MongoDB.
+
+### Cross-Platform Compatibility 
+As said, these days Swift is much more than only Apple platforms language, it is finally cross-platform. It is fully compatible with Linux, which allows applications to be hosted on popular cloud platforms like AWS, Google Cloud, and Azure, where Linux is the standard for backend environments. Apple has also expanded support to Windows, opening opportunities for cross-platform development where both Linux and Windows are used. This compatibility is mostly valuable for people who use Windows as their daily operating system.
+
+### Deployment
+Swift can be easily deployed to any cloud provider not only as a binary on Linux but also it can be containerized. Apple provides Pre-built Swift images that can be found on Docker Hub, making it straightforward to prepare such containers.
+
+## Conclusions
+I hope this post made you curious about Swift in the context of backend services development, and next time when you will be evaluating what technology to use for your blazing-fast application, Swift will be on that list ;).

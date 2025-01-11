@@ -82,7 +82,7 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
           document.addEventListener('DOMContentLoaded', function() {
             const currentUrl = window.location.href;
           
-            fetch(\`https://api.counterapi.dev/v1/${data.basename}lczerniawski/visits/up\`)
+            fetch(\`https://abacus.jasoncameron.dev/hit/lczerniawski/${data.basename}\`)
               .then(response => response.json())
               .then(data => {
                 document.getElementById('visits').innerText = data.count;

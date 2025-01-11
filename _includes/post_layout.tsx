@@ -82,10 +82,10 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
           document.addEventListener('DOMContentLoaded', function() {
             const currentUrl = window.location.href;
           
-            fetch(\`https://abacus.jasoncameron.dev/hit/lczerniawski/${data.basename}\`)
+            fetch(\`https://abacus.jasoncameron.dev/hit/lczerniawski/${data.basename}/visits\`)
               .then(response => response.json())
               .then(data => {
-                document.getElementById('visits').innerText = data.count;
+                document.getElementById('visits').innerText = data.value;
               })
               .catch(error => console.error('Error fetching visit count:', error));
 

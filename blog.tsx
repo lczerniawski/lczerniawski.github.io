@@ -2,7 +2,7 @@ export const title = "Łukasz's Corner - Blog";
 export const layout = "main_layout.tsx";
 
 export default (data: Lume.Data, _helpers: Lume.Helpers) => {
-    const posts = data.search.pages("type=post");
+    const posts = data.search.pages("type=post", "date=desc");
     return (
         <>
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-slate-100 sm:text-6xl text-center mt-10">
@@ -12,12 +12,12 @@ export default (data: Lume.Data, _helpers: Lume.Helpers) => {
                 {posts.map((post) => (
                     <article class="flex max-w-xl flex-col items-start justify-between">
                         <img
-                            class="mx-auto rounded-md w-80 h-64 mb-8 dark:hidden"
+                            class="mx-auto rounded-md w-80 h-80 mb-8 dark:hidden"
                             src={post.imageLightSrc}
                         >
                         </img>
                         <img
-                            class="mx-auto rounded-md w-80 h-64 mb-8 hidden dark:block"
+                            class="mx-auto rounded-md w-80 h-80 mb-8 hidden dark:block"
                             src={post.imageDarkSrc}
                         >
                         </img>

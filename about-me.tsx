@@ -49,7 +49,7 @@ export default (_data: Lume.Data, _helpers: Lume.Helpers) => (
               <section class="mb-4 break-inside-avoid">
                 <header>
                   <h3 class="flex-grow text-lg font-semibold text-gray-900 dark:text-slate-100 leading-snugish">.NET Developer</h3>
-                  <p class="leading-normal text-gray-600 dark:text-slate-400 text-md">07.2023 &ndash; 12.2023 | AXA</p>
+                  <p class="leading-normal text-gray-600 dark:text-slate-400 text-md">07.2022 &ndash; 12.2023 | AXA</p>
                 </header>
                 <ul class="mt-2 list-disc list-inside text-gray-800 dark:text-slate-200 text-md">
                   <li>As an active participant in an Agile team, I developed new features for our internal solution to meet the needs of agents and customers, while also providing ongoing support and addressing issues.</li>
@@ -61,7 +61,7 @@ export default (_data: Lume.Data, _helpers: Lume.Helpers) => (
               <section class="mb-4 break-inside-avoid">
                 <header>
                   <h3 class="flex-grow text-lg font-semibold text-gray-900 dark:text-slate-100 leading-snugish">Junior .NET Developer</h3>
-                  <p class="leading-normal text-gray-600 dark:text-slate-400 text-md">05.2022 &ndash; 06.2023 | AXA</p>
+                  <p class="leading-normal text-gray-600 dark:text-slate-400 text-md">05.2021 &ndash; 06.2022 | AXA</p>
                 </header>
               </section>
               <section class="mb-4 break-inside-avoid">

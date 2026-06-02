@@ -4,6 +4,7 @@ import Navigation from "../components/Navigation.astro";
 import "../styles/global.css";
 import { SITE_TITLE } from "../consts";
 import { Font } from "astro:assets";
+import BackToTop from "../components/BackToTop.astro";
 
 interface Props {
   title: string;
@@ -54,6 +55,7 @@ const finalTitle = `${SITE_TITLE} - ${title}`;
       document.addEventListener("astro:after-swap", applyTheme);
     </script>
 
+
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
 
@@ -66,6 +68,7 @@ const finalTitle = `${SITE_TITLE} - ${title}`;
   </head>
   <body>
     <Navigation />
+    <BackToTop />
     <div class="drafting-frame">
       <div class="terminal-header">
         <div class="terminal-controls" aria-hidden="true">

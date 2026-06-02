@@ -10,11 +10,13 @@ const posts = (await getCollection("blog"))
 
 <Layout title=`Home` description={SITE_DESCRIPTION}>
   <main>
-    <h2>Welcome</h2>
-    <p>
+    <div id="cursor"></div>
+    <h2 class="terminal-type" data-cursor="big">Welcome</h2>
+    <p class="terminal-type" data-cursor="small">
       I'm a Solution Architect at AXA working on security, .NET, Python, and
-      applied AI. This is my personal space for projects, thoughts, technical
-      explorations, guides.
+      applied AI.
+      <br />
+      This is my personal space for projects, thoughts, technical explorations, guides.
       <br />
       The opinions are my own.
     </p>
@@ -42,7 +44,78 @@ const posts = (await getCollection("blog"))
   </main>
 </Layout>
 
+<script>
+  import { stagger, splitText, createTimeline } from "animejs";
+  import { isMainCursorVisible } from "../store";
+
+  const targets = document.querySelectorAll(".terminal-type");
+  const cursor = document.getElementById("cursor");
+
+  const t1 = createTimeline();
+
+  targets.forEach((target) => {
+    const { chars } = splitText(target, { words: false, chars: true });
+    chars.forEach((char) => (char.style.opacity = "0"));
+
+    t1.add(chars, {
+      opacity: [{ from: 0, to: 1, duration: 1 }],
+      delay: stagger(25),
+      loop: false,
+      onBegin: () => {
+        const cursorSize = target.getAttribute("data-cursor");
+        if (cursorSize === "big") {
+          if (cursor) {
+            cursor.classList.remove("cursor-small");
+            cursor.classList.add("cursor-big");
+          }
+        }
+        if (cursorSize === "small") {
+          if (cursor) {
+            cursor.classList.remove("cursor-big");
+            cursor.classList.add("cursor-small");
+          }
+        }
+      },
+      onUpdate: () => {
+        const visibleChars = chars.filter((char) => char.style.opacity === "1");
+        const lastChar = visibleChars[visibleChars.length - 1];
+
+        if (lastChar) {
+          lastChar.after(cursor);
+        }
+      },
+    });
+
+    t1.onBegin = () => {
+      if (cursor) cursor.style.display = "inline-block";
+      isMainCursorVisible.set(false);
+    };
+
+    t1.onComplete = () => {
+      if (cursor) cursor.style.display = "none";
+      isMainCursorVisible.set(true);
+    };
+  });
+</script>
+
 <style>
+  #cursor {
+    width: 10px;
+    background-color: var(--accent-color);
+    display: none;
+    position: relative;
+  }
+
+  .cursor-small {
+    height: 30px;
+    top: 10px;
+  }
+
+  .cursor-big {
+    height: 40px;
+    top: 12px;
+  }
+
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

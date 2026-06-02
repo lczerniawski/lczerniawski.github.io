@@ -179,7 +179,6 @@ const { terminalPath, isSearchable = false } = Astro.props;
 
     if (!promptLine || !searchInput) return;
 
-    // Activates Search Mode
     function activateTerminalSearch() {
       if (staticText) staticText.style.display = "none";
       if (customCursor) customCursor.style.display = "none";
@@ -189,9 +188,8 @@ const { terminalPath, isSearchable = false } = Astro.props;
       searchInput.focus();
     }
 
-    // Deactivates Search Mode & resets visibility filters
     function deactivateTerminalSearch() {
-      searchInput.value = ""; // Reset query value
+      searchInput.value = "";
       searchQuery.set("");
 
       if (staticText) staticText.style.display = "inline";
@@ -200,13 +198,11 @@ const { terminalPath, isSearchable = false } = Astro.props;
       if (searchWrapper) searchWrapper.style.display = "none";
     }
 
-    // 1. Toggle Active State on Prompt Click
     promptLine.addEventListener("click", (e) => {
       e.stopPropagation();
       activateTerminalSearch();
     });
 
-    // 2. Escape Key Listener & Hotkey combinations
     document.addEventListener("keydown", (e) => {
       const isSearchShortcut =
         (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "f";
@@ -230,4 +226,17 @@ const { terminalPath, isSearchable = false } = Astro.props;
   }
 
   document.addEventListener("astro:page-load", initSearchTerminal);
+</script>
+
+<script>
+  import { isMainCursorVisible } from "../store";
+  const cursor = document.getElementById("prompt-cursor");
+
+  isMainCursorVisible.subscribe((visible) => {
+    if (visible) {
+      if (cursor) cursor.style.display = "inline-block";
+    } else {
+      if (cursor) cursor.style.display = "none";
+    }
+  });
 </script>

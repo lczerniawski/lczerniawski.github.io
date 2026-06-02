@@ -51,7 +51,7 @@ const finalTitle = `${SITE_TITLE} - ${title}`;
       // Apply on initial load
       applyTheme();
 
-      // Apply before page swap to prevent flash
+      // Apply after page swap to prevent flash
       document.addEventListener("astro:after-swap", applyTheme);
     </script>
 
@@ -69,6 +69,16 @@ const finalTitle = `${SITE_TITLE} - ${title}`;
         "%cThe only console you need is right on the web page 😉",
         "color: #00ff00; background: #111; font-size: 16px; font-weight: bold; padding: 8px 12px; border: 1px solid #00ff00; border-radius: 4px;",
       );
+    </script>
+
+    <!-- Resets browser focus after page swap so custom keyboard focus rings don't break after Astro page transitions.  -->
+    <script is:inline>
+      document.addEventListener('astro:page-load', () => {
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+          document.body.focus();
+        }
+      });
     </script>
 
     <!-- Canonical URL -->

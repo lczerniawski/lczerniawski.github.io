@@ -5,14 +5,16 @@ import "../styles/global.css";
 import { SITE_TITLE } from "../consts";
 import { Font } from "astro:assets";
 import BackToTop from "../components/BackToTop.astro";
+import TerminalBody from "../components/TerminalBody.astro";
 
 interface Props {
   title: string;
   description: string;
+  isSearchable?: boolean;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description } = Astro.props;
+const { title, description, isSearchable = false } = Astro.props;
 const terminalPath = `~${Astro.url.pathname}`;
 const finalTitle = `${SITE_TITLE} - ${title}`;
 ---
@@ -73,7 +75,7 @@ const finalTitle = `${SITE_TITLE} - ${title}`;
 
     <!-- Resets browser focus after page swap so custom keyboard focus rings don't break after Astro page transitions.  -->
     <script is:inline>
-      document.addEventListener('astro:page-load', () => {
+      document.addEventListener("astro:page-load", () => {
         if (document.activeElement instanceof HTMLElement) {
           document.activeElement.blur();
           document.body.focus();
@@ -103,15 +105,9 @@ const finalTitle = `${SITE_TITLE} - ${title}`;
         </div>
         <div class="terminal-title">{terminalPath}</div>
       </div>
-      <div class="terminal-body">
-        <div class="terminal-prompt">
-          <span class="terminal-prompt-text">$ open {terminalPath}</span>
-          <span class="terminal-cursor" aria-hidden="true"></span>
-        </div>
-        <div class="frame-content">
-          <slot />
-        </div>
-      </div>
+      <TerminalBody terminalPath={terminalPath} isSearchable={isSearchable}>
+        <slot />
+      </TerminalBody>
     </div>
   </body>
 </html>
@@ -205,83 +201,9 @@ const finalTitle = `${SITE_TITLE} - ${title}`;
     letter-spacing: 0.4px;
   }
 
-  .terminal-body {
-    padding: 24px 32px 32px;
-  }
-
-  .terminal-prompt {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-    color: var(--accent-color);
-    font-size: 12px;
-    margin-bottom: 18px;
-    border-bottom: 1px dashed var(--border-color);
-    padding-bottom: 10px;
-  }
-
-  .terminal-prompt-text {
-    min-width: 0;
-    overflow-wrap: anywhere;
-  }
-
-  .terminal-cursor {
-    width: 8px;
-    height: 20px;
-    background: var(--accent-color);
-    animation: blink 1s steps(1, end) infinite;
-    flex: none;
-  }
-
-  @keyframes blink {
-    0%,
-    50% {
-      opacity: 1;
-    }
-    51%,
-    100% {
-      opacity: 0;
-    }
-  }
-
-  .frame-content h1,
-  .frame-content h2,
-  .frame-content h3 {
-    color: var(--text-light);
-    margin-top: 24px;
-    margin-bottom: 12px;
-  }
-
-  .frame-content p {
-    color: var(--text-light);
-    margin: 12px 0;
-  }
-
-  .frame-content a {
-    color: var(--link-text);
-    text-decoration: none;
-    border-bottom: 1px dotted var(--link-text);
-  }
-
-  .frame-content a:hover {
-    color: var(--link-hover);
-  }
-
-  .frame-content code {
-    background: var(--code-bg);
-    padding: 2px 6px;
-    font-size: 13px;
-    color: var(--code-text);
-  }
-
   @media (max-width: 768px) {
     .drafting-frame {
       margin: 20px auto;
-    }
-
-    .terminal-body {
-      padding: 16px 20px 20px;
     }
   }
 </style>

@@ -9,11 +9,15 @@ const posts = (await getCollection("blog")).sort(
 );
 ---
 
-<Layout title=`Blog` description="All posts">
+<Layout title="Blog" description="All posts" isSearchable={true}>
   <div class="blog-list">
     {
       posts.map((post) => (
-        <div class="blog-item">
+        <div
+          class="blog-item"
+          data-title={post.data.title.toLowerCase()}
+          data-desc={post.data.description?.toLowerCase() || ""}
+        >
           <a href={`/blog/${post.id}/`}>
             {post.data.heroImage && (
               <Image
@@ -31,7 +35,51 @@ const posts = (await getCollection("blog")).sort(
       ))
     }
   </div>
+
+  <p id="search-empty-error" class="search-empty-error" style="display: none;">
+    [SYSTEM] No entries matched the execution criteria.
+  </p>
 </Layout>
+
+<script>
+  import { searchQuery } from "../../store";
+
+  function initSearch() {
+    const blogItems = document.querySelectorAll(".blog-item");
+    const errorLog = document.getElementById("search-empty-error");
+    const statusBlog = document.getElementById("search-blog-status");
+
+    searchQuery.subscribe((query) => {
+      if (!query) {
+        if (errorLog) errorLog.style.display = "none";
+        blogItems.forEach((item) => {
+          (item as HTMLElement).style.display = "block";
+        });
+      }
+
+      let matchCount = 0;
+      blogItems.forEach((item) => {
+        const itemHtml = item as HTMLElement;
+        const title = itemHtml.dataset.title || "";
+        const desc = itemHtml.dataset.desc || "";
+
+        if (title.includes(query) || desc.includes(query)) {
+          itemHtml.style.display = "block";
+          matchCount++;
+        } else {
+          itemHtml.style.display = "none";
+        }
+      });
+
+      if (errorLog) {
+        errorLog.style.display =
+          matchCount === 0 && query !== "" ? "block" : "none";
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", initSearch);
+</script>
 
 <style>
   .blog-list {
@@ -76,5 +124,11 @@ const posts = (await getCollection("blog")).sort(
     color: var(--text-light);
     margin-top: 8px;
     margin-bottom: 0;
+  }
+
+  .search-empty-error {
+    color: var(--dot-orange, #ff5f56);
+    font-size: 12px;
+    font-family: var(--font-mona);
   }
 </style>

@@ -1,0 +1,61 @@
+<button id="back-to-top" class="terminal-button" aria-label="Back to top">
+  ↑ <span class="text">back</span>
+</button>
+
+<style>
+  .terminal-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 8px 12px;
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    font-family: var(--font-mona);
+    font-size: 13px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.3s ease,
+      color 0.2s ease;
+    z-index: 100;
+  }
+
+  .terminal-button:hover {
+    color: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+
+  .terminal-button.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (max-width: 1100px) {
+    .text {
+        display: none;
+    }
+  }
+</style>
+
+<script>
+  function setupBackToTopButton() {
+    const button = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        button?.classList.add("visible");
+      } else {
+        button?.classList.remove("visible");
+      }
+    });
+
+    button?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  setupBackToTopButton();
+  document.addEventListener("astro:page-load", setupBackToTopButton)
+</script>

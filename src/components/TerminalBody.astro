@@ -78,6 +78,7 @@ const { terminalPath, isSearchable = false } = Astro.props;
     .clickable-prompt {
       cursor: pointer;
     }
+
     .search-input-wrapper {
       display: flex;
       align-items: center;
@@ -95,6 +96,7 @@ const { terminalPath, isSearchable = false } = Astro.props;
       flex-grow: 1;
       padding: 0;
       caret-color: var(--accent-color);
+      caret-shape: block;
     }
 
     .search-hint-msg {
@@ -108,7 +110,7 @@ const { terminalPath, isSearchable = false } = Astro.props;
     }
     .terminal-cursor {
       width: 8px;
-      height: 20px;
+      height: 15px;
       background: var(--accent-color);
       animation: blink 1s steps(1, end) infinite;
       flex: none;

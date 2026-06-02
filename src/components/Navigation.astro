@@ -1,0 +1,92 @@
+---
+import { SITE_TITLE } from "../consts";
+import NavigationLink from "./NavigationLink.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+---
+
+<nav class="drafting-nav">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a href="/" title="Home">{SITE_TITLE}</a>
+    </div>
+    <div class="navbar">
+      <ul class="nav-links">
+        <li>
+          <NavigationLink href="/">home</NavigationLink>
+        </li>
+        <li>
+          <NavigationLink href="/blog">blog</NavigationLink>
+        </li>
+        <li>
+          <NavigationLink href="/about">about</NavigationLink>
+        </li>
+      </ul>
+      <ThemeToggle />
+    </div>
+  </div>
+</nav>
+
+<style>
+  .drafting-nav {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border-color);
+    font-family: var(--font-mona);
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .nav-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .nav-logo a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: color 0.2s ease;
+    border: none;
+  }
+
+  .nav-logo a:hover {
+    color: var(--accent-hover);
+  }
+
+  .navbar {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .nav-container {
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .nav-links {
+      gap: 12px;
+    }
+
+    .navbar {
+      width: 100%;
+    }
+  }
+</style>

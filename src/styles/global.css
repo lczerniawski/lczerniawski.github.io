@@ -1,141 +1,108 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
-
-:root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+html[data-theme="dark"] {
+  --bg: #1a1a1a;
+  --text-light: #e8e8e8;
+  --text-muted: #888;
+  --border-color: #333;
+  --accent-color: #7c7eff;
+  --accent-hover: #9999ff;
+  --code-bg: rgba(0, 0, 0, 0.4);
+  --code-text: #a8e6cf;
+  --table-border: #222;
+  --table-hover: rgba(124, 126, 255, 0.05);
+  --link-text: #7c7eff;
+  --link-hover: #9999ff;
+  /* Terminal frame colors */
+  --frame-bg: rgba(1, 1, 1, 0.8);
+  --frame-shadow-1: rgba(124, 126, 255, 0.18);
+  --frame-shadow-2: rgba(124, 126, 255, 0.14);
+  --frame-shadow-3: rgba(124, 126, 255, 0.05);
+  --header-overlay: rgba(0, 0, 0, 0.3);
+  /* Terminal dot colors */
+  --dot-orange: #f97316;
+  --dot-yellow: #eab308;
+  --dot-green: #22c55e;
 }
+
+html[data-theme="light"] {
+  --bg: #f5f5f5;
+  --text-light: #1a1a1a;
+  --text-muted: #555;
+  --border-color: #d0d0d0;
+  --accent-color: #4f46e5;
+  --accent-hover: #3d38cc;
+  --code-bg: rgba(79, 70, 229, 0.1);
+  --code-text: #0d47a1;
+  --table-border: #d0d0d0;
+  --table-hover: rgba(79, 70, 229, 0.08);
+  --link-text: #4f46e5;
+  --link-hover: #3d38cc;
+  /* Terminal frame colors */
+  --frame-bg: rgba(245, 245, 245, 0.8);
+  --frame-shadow-1: rgba(79, 70, 229, 0.14);
+  --frame-shadow-2: rgba(79, 70, 229, 0.1);
+  --frame-shadow-3: rgba(79, 70, 229, 0.03);
+  --header-overlay: rgba(0, 0, 0, 0.04);
+  /* Terminal dot colors */
+  --dot-orange: #f97316;
+  --dot-yellow: #eab308;
+  --dot-green: #22c55e;
+}
+
+html {
+  background: var(--bg);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 body {
-	font-family: var(--font-atkinson);
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
-}
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
-a {
-	color: var(--accent);
-}
-a:hover {
-	color: var(--accent);
-}
-p {
-	margin-bottom: 1em;
-}
-.prose p {
-	margin-bottom: 2em;
-}
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
-}
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
+  background: var(--bg);
+  color: var(--text-light);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
-	white-space: nowrap;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-family: var(--font-mona);
+  font-size: 13px;
+}
+
+table thead {
+  border-bottom: 2px solid var(--border-color);
+}
+
+table thead th {
+  text-align: left;
+  padding: 12px 8px;
+  color: var(--accent-color);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+table tbody td {
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--table-border);
+  color: var(--text-light);
+}
+
+table tbody tr:hover {
+  background-color: var(--table-hover);
+}
+
+a {
+  color: var(--link-text);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--link-text);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+  border-bottom-color: var(--link-hover);
+}
+
+@media (max-width: 768px) {
+  table {
+    font-size: 11px;
+  }
 }

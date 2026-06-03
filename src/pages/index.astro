@@ -11,8 +11,8 @@ const posts = (await getCollection("blog"))
 <Layout title=`Home` description={SITE_DESCRIPTION}>
   <main>
     <div id="cursor"></div>
-    <h2 class="terminal-type" data-cursor="big">Welcome</h2>
-    <p class="terminal-type" data-cursor="small">
+    <h2 class="typed" data-cursor="big">Welcome</h2>
+    <p class="typed" data-cursor="small">
       I'm a Solution Architect at AXA working on security, .NET, Python, and
       applied AI.
       <br />
@@ -21,26 +21,28 @@ const posts = (await getCollection("blog"))
       The opinions are my own.
     </p>
 
-    <h3>Latest Posts</h3>
-    <div class="posts-grid">
-      {
-        posts.map((post) => (
-          <article class="post-card">
-            <h4>
-              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-            </h4>
-            <p>{post.data.description}</p>
-            <a href={`/blog/${post.id}/`} class="read-more">
-              Read more →
-            </a>
-          </article>
-        ))
-      }
-    </div>
+    <div id="posts">
+      <h3>Latest Posts</h3>
+      <div class="posts-grid">
+        {
+          posts.map((post) => (
+            <article class="post-card">
+              <h4>
+                <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              </h4>
+              <p>{post.data.description}</p>
+              <a href={`/blog/${post.id}/`} class="read-more">
+                Read more →
+              </a>
+            </article>
+          ))
+        }
+      </div>
 
-    <p class="all-posts">
-      <a href="/blog/">View all posts →</a>
-    </p>
+      <p class="all-posts">
+        <a href="/blog/">View all posts →</a>
+      </p>
+    </div>
   </main>
 </Layout>
 
@@ -48,7 +50,8 @@ const posts = (await getCollection("blog"))
   import { stagger, splitText, createTimeline } from "animejs";
   import { isMainCursorVisible } from "../store";
 
-  const targets = document.querySelectorAll(".terminal-type");
+  const posts = document.getElementById("posts");
+  const targets = document.querySelectorAll(".typed");
   const cursor = document.getElementById("cursor");
 
   const t1 = createTimeline();
@@ -69,6 +72,7 @@ const posts = (await getCollection("blog"))
             cursor.classList.add("cursor-big");
           }
         }
+
         if (cursorSize === "small") {
           if (cursor) {
             cursor.classList.remove("cursor-big");
@@ -88,13 +92,34 @@ const posts = (await getCollection("blog"))
 
     t1.onBegin = () => {
       if (cursor) cursor.style.display = "inline-block";
+      if (targets) {
+        targets.forEach((target) => {
+          target.classList.add("is-visible");
+        });
+      }
       isMainCursorVisible.set(false);
     };
 
     t1.onComplete = () => {
       if (cursor) cursor.style.display = "none";
+      if (posts) {
+        posts.style.opacity = "1";
+        posts.style.transform = "translateY(0px)";
+      }
       isMainCursorVisible.set(true);
     };
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    const posts = document.getElementById("posts");
+    const targets = document.querySelectorAll(".typed");
+
+    if (posts) posts.classList.add("is-visible");
+    if (targets) {
+      targets.forEach((target) => {
+        target.classList.add("is-visible");
+      });
+    }
   });
 </script>
 
@@ -114,6 +139,28 @@ const posts = (await getCollection("blog"))
   .cursor-big {
     height: 40px;
     top: 12px;
+  }
+
+  .typed {
+    opacity: 0;
+  }
+
+  .typed.is-visible {
+    opacity: 1;
+  }
+
+  #posts {
+    opacity: 0;
+    transform: translateY(100%);
+    transition:
+      transform 0.3s ease-out,
+      opacity 0.3s ease-out;
+  }
+
+  #posts.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: none;
   }
 
   .posts-grid {

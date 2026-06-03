@@ -52,116 +52,6 @@ const { terminalPath, isSearchable = false } = Astro.props;
   <div class="frame-content">
     <slot />
   </div>
-
-  <style>
-    .terminal-body {
-      padding: 24px 32px 32px;
-    }
-
-    .terminal-prompt-container {
-      display: block;
-      gap: 12px;
-      margin-bottom: 18px;
-      border-bottom: 1px dashed var(--border-color);
-      padding-bottom: 10px;
-    }
-
-    .terminal-prompt {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--accent-color);
-      font-size: 12px;
-      flex-grow: 1;
-    }
-
-    .clickable-prompt {
-      cursor: pointer;
-    }
-
-    .search-input-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-    }
-
-    #layout-terminal-search {
-      background: transparent;
-      border: none;
-      color: var(--text-light);
-      font-family: var(--font-mona);
-      font-size: 12px;
-      outline: none;
-      flex-grow: 1;
-      padding: 0;
-      caret-color: var(--accent-color);
-      caret-shape: block;
-    }
-
-    .search-hint-msg {
-      font-size: 11px;
-      color: var(--text-muted);
-      opacity: 0.7;
-    }
-    .terminal-prompt-text {
-      min-width: 0;
-      overflow-wrap: anywhere;
-    }
-    .terminal-cursor {
-      width: 8px;
-      height: 15px;
-      background: var(--accent-color);
-      animation: blink 1s steps(1, end) infinite;
-      flex: none;
-    }
-    @keyframes blink {
-      0%,
-      50% {
-        opacity: 1;
-      }
-      51%,
-      100% {
-        opacity: 0;
-      }
-    }
-
-    .frame-content h1,
-    .frame-content h2,
-    .frame-content h3 {
-      color: var(--text-light);
-      margin-top: 24px;
-      margin-bottom: 12px;
-    }
-
-    .frame-content p {
-      color: var(--text-light);
-      margin: 12px 0;
-    }
-
-    .frame-content a {
-      color: var(--link-text);
-      text-decoration: none;
-      border-bottom: 1px dotted var(--link-text);
-    }
-
-    .frame-content a:hover {
-      color: var(--link-hover);
-    }
-
-    .frame-content code {
-      background: var(--code-bg);
-      padding: 2px 6px;
-      font-size: 13px;
-      color: var(--code-text);
-    }
-
-    @media (max-width: 768px) {
-      .terminal-body {
-        padding: 16px 20px 20px;
-      }
-    }
-  </style>
 </div>
 
 <script>
@@ -230,13 +120,145 @@ const { terminalPath, isSearchable = false } = Astro.props;
 
 <script>
   import { isMainCursorVisible } from "../store";
-  const cursor = document.getElementById("prompt-cursor");
 
-  isMainCursorVisible.subscribe((visible) => {
-    if (visible) {
-      if (cursor) cursor.style.display = "inline-block";
+  function switchCursorVisibility(cursor: HTMLElement, isVisible: boolean) {
+    if (isVisible) {
+      cursor.classList.add("is-visible");
     } else {
-      if (cursor) cursor.style.display = "none";
+      cursor.classList.remove("is-visible");
     }
+  }
+
+  const cursor = document.getElementById("prompt-cursor");
+  if (cursor) {
+    isMainCursorVisible.subscribe((visible) =>
+      switchCursorVisibility(cursor, visible),
+    );
+  }
+
+  document.addEventListener("astro:after-swap", () => {
+    const cursor = document.getElementById("prompt-cursor");
+    if (!cursor) return;
+
+    const visible = isMainCursorVisible.get();
+    switchCursorVisibility(cursor, visible);
   });
 </script>
+
+<style>
+  .terminal-body {
+    padding: 24px 32px 32px;
+  }
+
+  .terminal-prompt-container {
+    display: block;
+    gap: 12px;
+    margin-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 10px;
+  }
+
+  .terminal-prompt {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent-color);
+    font-size: 12px;
+    flex-grow: 1;
+  }
+
+  .clickable-prompt {
+    cursor: pointer;
+  }
+
+  .search-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  #layout-terminal-search {
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+    font-family: var(--font-mona);
+    font-size: 12px;
+    outline: none;
+    flex-grow: 1;
+    padding: 0;
+    caret-color: var(--accent-color);
+    caret-shape: block;
+  }
+
+  .search-hint-msg {
+    font-size: 11px;
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+
+  .terminal-prompt-text {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .terminal-cursor {
+    width: 8px;
+    height: 15px;
+    background: var(--accent-color);
+    flex: none;
+    opacity: 0;
+  }
+
+  .terminal-cursor.is-visible {
+    animation: blink 1s steps(1, end) infinite;
+    opacity: 0;
+  }
+
+  @keyframes blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .frame-content h1,
+  .frame-content h2,
+  .frame-content h3 {
+    color: var(--text-light);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  .frame-content p {
+    color: var(--text-light);
+    margin: 12px 0;
+  }
+
+  .frame-content a {
+    color: var(--link-text);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--link-text);
+  }
+
+  .frame-content a:hover {
+    color: var(--link-hover);
+  }
+
+  .frame-content code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    font-size: 13px;
+    color: var(--code-text);
+  }
+
+  @media (max-width: 768px) {
+    .terminal-body {
+      padding: 16px 20px 20px;
+    }
+  }
+</style>

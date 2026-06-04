@@ -14,9 +14,14 @@ const { terminalPath, isSearchable = false } = Astro.props;
       id="terminal-prompt-line"
       class:list={{ "clickable-prompt": isSearchable }}
     >
-      <span id="prompt-static-text" class="terminal-prompt-text"
-        >$ open {terminalPath}</span
+      <span class="terminal-prompt-prefix">$ </span>
+      <span
+        id="prompt-static-text"
+        class="terminal-prompt-text"
+        data-path={`open ${terminalPath}`}
       >
+        open {terminalPath}
+      </span>
 
       {
         isSearchable && (
@@ -64,24 +69,27 @@ const { terminalPath, isSearchable = false } = Astro.props;
     const searchInput = document.getElementById(
       "layout-terminal-search",
     ) as HTMLInputElement;
+    const prefix = document.querySelector(
+      ".terminal-prompt-prefix",
+    ) as HTMLElement;
     const customCursor = document.getElementById("prompt-cursor");
     const searchHint = document.getElementById("search-hint");
 
     if (!promptLine || !searchInput) return;
 
     function activateTerminalSearch() {
+      if (prefix) prefix.style.display = "none";
       if (staticText) staticText.style.display = "none";
       if (customCursor) customCursor.style.display = "none";
       if (searchHint) searchHint.style.display = "none";
       if (searchWrapper) searchWrapper.style.display = "flex";
-
       searchInput.focus();
     }
 
     function deactivateTerminalSearch() {
       searchInput.value = "";
       searchQuery.set("");
-
+      if (prefix) prefix.style.display = "inline";
       if (staticText) staticText.style.display = "inline";
       if (customCursor) customCursor.style.display = "inline-block";
       if (searchHint) searchHint.style.display = "inline";
@@ -145,6 +153,82 @@ const { terminalPath, isSearchable = false } = Astro.props;
   });
 </script>
 
+<script>
+  import { animate } from "animejs";
+  import { navigate } from "astro:transitions/client";
+  import { isNavigationOngoing, lastNavigationPathname } from "../store";
+
+  function initTerminalNavigation() {
+    const promptText = document.getElementById("prompt-static-text");
+    if (!promptText) return;
+
+    const targetText = promptText.getAttribute("data-path");
+    if (!targetText) return;
+
+    const currentPathname = window.location.pathname;
+
+    if (lastNavigationPathname.get() !== currentPathname) {
+      promptText.textContent = "";
+      const textObj = { chargedChars: 0 };
+
+      animate(textObj, {
+        chargedChars: targetText.length,
+        ease: "linear",
+        duration: targetText.length * 50,
+        onUpdate: () => {
+          promptText.textContent = targetText.substring(
+            0,
+            textObj.chargedChars,
+          );
+        },
+      });
+    }
+
+    lastNavigationPathname.set(currentPathname);
+
+    const localLinks = document.querySelectorAll(
+      'a[href^="/"]:not([target="_blank"])',
+    );
+
+    localLinks.forEach((link) => {
+      if (link.hasAttribute("data-terminal-bound")) return;
+      link.setAttribute("data-terminal-bound", "true");
+
+      link.addEventListener("click", (e) => {
+        const isNavigating = isNavigationOngoing.get();
+        const href = link.getAttribute("href");
+        if (!href || isNavigating) return;
+
+        const targetPathname = new URL(href, window.location.origin).pathname;
+        if (window.location.pathname === targetPathname) return;
+
+        e.preventDefault();
+        isNavigationOngoing.set(true);
+
+        const currentText = promptText.textContent;
+        const backspaceObj = { length: currentText.length };
+
+        animate(backspaceObj, {
+          length: 0,
+          ease: "linear",
+          duration: currentText.length * 25,
+          onUpdate: () => {
+            promptText.textContent = currentText.substring(
+              0,
+              backspaceObj.length,
+            );
+          },
+          onComplete: () => {
+            isNavigationOngoing.set(false);
+            navigate(href);
+          },
+        });
+      });
+    });
+  }
+  document.addEventListener("astro:page-load", initTerminalNavigation);
+</script>
+
 <style>
   .terminal-body {
     padding: 24px 32px 32px;
@@ -161,10 +245,14 @@ const { terminalPath, isSearchable = false } = Astro.props;
   .terminal-prompt {
     display: flex;
     align-items: center;
-    gap: 6px;
     color: var(--accent-color);
     font-size: 12px;
     flex-grow: 1;
+  }
+
+  .terminal-prompt-prefix {
+    padding-right: 6px;
+    user-select: none;
   }
 
   .clickable-prompt {
@@ -174,7 +262,7 @@ const { terminalPath, isSearchable = false } = Astro.props;
   .search-input-wrapper {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     width: 100%;
   }
 
@@ -208,6 +296,7 @@ const { terminalPath, isSearchable = false } = Astro.props;
     background: var(--accent-color);
     flex: none;
     opacity: 0;
+    margin-left: 6px;
   }
 
   .terminal-cursor.is-visible {

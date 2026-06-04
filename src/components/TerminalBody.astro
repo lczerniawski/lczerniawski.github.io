@@ -173,6 +173,10 @@ const { terminalPath, isSearchable = false } = Astro.props;
   } from "../store";
 
   function initTerminalNavigation() {
+    const promptLine = document.getElementById("terminal-prompt-line");
+    if (!promptLine) return;
+    promptLine.style.opacity = "1";
+
     const promptText = document.getElementById("prompt-static-text");
     if (!promptText) return;
 
@@ -269,6 +273,7 @@ const { terminalPath, isSearchable = false } = Astro.props;
     color: var(--accent-color);
     font-size: 12px;
     flex-grow: 1;
+    opacity: 0;
   }
 
   .terminal-prompt-prefix {

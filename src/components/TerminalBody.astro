@@ -156,7 +156,7 @@ const { terminalPath, isSearchable = false } = Astro.props;
 <script>
   import { animate } from "animejs";
   import { navigate } from "astro:transitions/client";
-  import { isNavigationOngoing, lastNavigationPathname, isWritingTerminalAnimationFinished } from "../store";
+  import { isNavigationOngoing, lastNavigationPathname, isWritingTerminalAnimationFinished, isMainCursorVisible } from "../store";
 
   function initTerminalNavigation() {
     const promptText = document.getElementById("prompt-static-text");
@@ -200,6 +200,7 @@ const { terminalPath, isSearchable = false } = Astro.props;
       link.setAttribute("data-terminal-bound", "true");
 
       link.addEventListener("click", (e) => {
+        isMainCursorVisible.set(true);
         const isNavigating = isNavigationOngoing.get();
         const href = link.getAttribute("href");
         if (!href || isNavigating) return;

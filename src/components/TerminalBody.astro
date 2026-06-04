@@ -47,9 +47,11 @@ const { terminalPath, isSearchable = false } = Astro.props;
 
     {
       isSearchable && (
-        <span class="search-hint-msg" id="search-hint">
-          [Tip: Click prompt or press CMD/Ctrl+F or press Enter to search posts,
-          ESC to exit search.]
+        <span class="search-hint-msg" id="start-search-hint">
+          [Tip: Click prompt or press CMD/Ctrl+F or press Enter to search posts.]
+        </span>
+        <span class="search-hint-msg" id="stop-search-hint">
+          [Tip: Click Escape or click out of the prompt to exit search.]
         </span>
       )
     }
@@ -73,7 +75,8 @@ const { terminalPath, isSearchable = false } = Astro.props;
       ".terminal-prompt-prefix",
     ) as HTMLElement;
     const customCursor = document.getElementById("prompt-cursor");
-    const searchHint = document.getElementById("search-hint");
+    const startSearchHint = document.getElementById("start-search-hint");
+    const stopSearchHint = document.getElementById("stop-search-hint");
 
     if (!promptLine || !searchInput) return;
 
@@ -81,7 +84,8 @@ const { terminalPath, isSearchable = false } = Astro.props;
       if (prefix) prefix.style.display = "none";
       if (staticText) staticText.style.display = "none";
       if (customCursor) customCursor.style.display = "none";
-      if (searchHint) searchHint.style.display = "none";
+      if (startSearchHint) startSearchHint.style.display = "none";
+      if (stopSearchHint) stopSearchHint.style.display = "inline";
       if (searchWrapper) searchWrapper.style.display = "flex";
       searchInput.focus();
     }
@@ -92,7 +96,8 @@ const { terminalPath, isSearchable = false } = Astro.props;
       if (prefix) prefix.style.display = "inline";
       if (staticText) staticText.style.display = "inline";
       if (customCursor) customCursor.style.display = "inline-block";
-      if (searchHint) searchHint.style.display = "inline";
+      if (startSearchHint) startSearchHint.style.display = "inline";
+      if (stopSearchHint) stopSearchHint.style.display = "none";
       if (searchWrapper) searchWrapper.style.display = "none";
     }
 
@@ -114,6 +119,10 @@ const { terminalPath, isSearchable = false } = Astro.props;
       if (e.key === "Escape") {
         deactivateTerminalSearch();
       }
+    });
+
+    document.addEventListener("click", () => {
+      deactivateTerminalSearch();
     });
 
     searchInput.addEventListener("input", (e) => {
@@ -156,7 +165,12 @@ const { terminalPath, isSearchable = false } = Astro.props;
 <script>
   import { animate } from "animejs";
   import { navigate } from "astro:transitions/client";
-  import { isNavigationOngoing, lastNavigationPathname, isWritingTerminalAnimationFinished, isMainCursorVisible } from "../store";
+  import {
+    isNavigationOngoing,
+    lastNavigationPathname,
+    isWritingTerminalAnimationFinished,
+    isMainCursorVisible,
+  } from "../store";
 
   function initTerminalNavigation() {
     const promptText = document.getElementById("prompt-static-text");
@@ -185,7 +199,7 @@ const { terminalPath, isSearchable = false } = Astro.props;
         },
         onComplete: () => {
           isWritingTerminalAnimationFinished.set(true);
-        }
+        },
       });
     }
 
@@ -289,6 +303,10 @@ const { terminalPath, isSearchable = false } = Astro.props;
     font-size: 11px;
     color: var(--text-muted);
     opacity: 0.7;
+  }
+
+  #stop-search-hint {
+    display: none;
   }
 
   .terminal-prompt-text {

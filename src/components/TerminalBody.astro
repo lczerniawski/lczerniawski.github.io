@@ -156,7 +156,7 @@ const { terminalPath, isSearchable = false } = Astro.props;
 <script>
   import { animate } from "animejs";
   import { navigate } from "astro:transitions/client";
-  import { isNavigationOngoing, lastNavigationPathname } from "../store";
+  import { isNavigationOngoing, lastNavigationPathname, isWritingTerminalAnimationFinished } from "../store";
 
   function initTerminalNavigation() {
     const promptText = document.getElementById("prompt-static-text");
@@ -168,6 +168,8 @@ const { terminalPath, isSearchable = false } = Astro.props;
     const currentPathname = window.location.pathname;
 
     if (lastNavigationPathname.get() !== currentPathname) {
+      isWritingTerminalAnimationFinished.set(false);
+
       promptText.textContent = "";
       const textObj = { chargedChars: 0 };
 
@@ -181,6 +183,9 @@ const { terminalPath, isSearchable = false } = Astro.props;
             textObj.chargedChars,
           );
         },
+        onComplete: () => {
+          isWritingTerminalAnimationFinished.set(true);
+        }
       });
     }
 

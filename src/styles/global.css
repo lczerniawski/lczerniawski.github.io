@@ -50,7 +50,7 @@ html[data-theme="light"] {
 
 html {
   background: var(--bg);
-  font-size: 15px; 
+  font-size: 15px;
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
   -webkit-font-smoothing: antialiased;
@@ -131,12 +131,12 @@ a:hover {
   }
 }
 
-a:focus-visible, 
-button:focus-visible, 
-input:focus-visible, 
-select:focus-visible, 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
 textarea:focus-visible {
   outline: 2px solid var(--accent-color);
-  outline-offset: 4px; 
+  outline-offset: 4px;
   transition: outline-offset 0.2s ease, outline-color 0.2s ease !important;
 }

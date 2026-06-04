@@ -52,7 +52,7 @@ import Layout from "../layouts/Layout.astro";
 
   <section class="cv-section">
     <h2>Education</h2>
-    <ul class="education-list">
+    <ul class="square-list">
       <li>
         MSc in Artificial Intelligence, University of Liverpool, 2023 - 2026
       </li>
@@ -62,7 +62,7 @@ import Layout from "../layouts/Layout.astro";
 
   <section class="cv-section">
     <h2>Certifications</h2>
-    <ul class="certifications-list">
+    <ul class="square-list">
       <li>
         <a
           href="https://www.credly.com/badges/663816d8-7088-438b-bcd3-08e4c183d881/public_url"
@@ -285,34 +285,31 @@ import Layout from "../layouts/Layout.astro";
     margin-top: 35px;
   }
 
-  li {
-    padding-bottom: 5px;
-  }
-
   .separator {
     border: none;
     border-bottom: 1px solid var(--table-border);
     margin: 10px 0;
   }
 
-  ul {
+  .square-list {
     list-style: none;
     padding-left: 0;
     margin: 24px 0;
   }
 
-  ul li {
+  .square-list li {
     position: relative;
     padding-left: 20px;
     margin-bottom: 12px;
+    padding-bottom: 5px;
     color: var(--text-light);
   }
 
-  ul li::before {
+  .square-list li::before {
     content: "";
     position: absolute;
     left: 4px;
-    top: 7px;
+    top: 9px;
     width: 6px;
     height: 6px;
     background-color: var(--accent-color);

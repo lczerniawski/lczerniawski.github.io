@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Contact" description="Get in touch with me">
+  <section class="profile-section">
+    <h2 class="header">Contact</h2>
+    <p>
+      Whether you want to discuss system architecture, security, AI, or just
+      talk about open-source, feel free to reach out.
+    </p>
+  </section>
+
+  <section class="channels-section">
+    <h2 class="header">Channels</h2>
+    <ul class="square-list contact-list">
+      <li>
+        <strong>Email:</strong>
+        <a href="mailto:l.czerniawski@icloud.com">l.czerniawski@icloud.com</a>
+      </li>
+      <li>
+        <strong>GitHub:</strong>
+        <a
+          href="https://github.com/lczerniawski"
+          target="_blank"
+          rel="noopener noreferrer">github.com/lczerniawski</a
+        >
+      </li>
+      <li>
+        <strong>LinkedIn:</strong>
+        <a
+          href="https://www.linkedin.com/in/lczerniawski"
+          target="_blank"
+          rel="noopener noreferrer">linkedin.com/in/lczerniawski</a
+        >
+      </li>
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  .header {
+    margin-bottom: 0px;
+  }
+
+  .channels-section {
+    margin-top: 35px;
+  }
+
+  .square-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+  }
+
+  .square-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    padding-bottom: 5px;
+    color: var(--text-light);
+  }
+
+  .square-list li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-color);
+  }
+
+  .contact-list strong {
+    font-weight: 600;
+    margin-right: 4px;
+    font-family: var(--font-mona);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .contact-list a {
+    font-size: 14px;
+  }
+</style>

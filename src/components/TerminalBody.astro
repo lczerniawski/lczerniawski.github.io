@@ -247,6 +247,7 @@ const { terminalPath, isSearchable = false } = Astro.props;
     });
   }
   document.addEventListener("astro:page-load", initTerminalNavigation);
+  document.addEventListener("astro:before-swap", () => isWritingTerminalAnimationFinished.set(false))
 </script>
 
 <style>

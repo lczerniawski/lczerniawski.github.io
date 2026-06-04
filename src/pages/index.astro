@@ -48,8 +48,10 @@ const posts = (await getCollection("blog"))
 
 <script>
   import { stagger, splitText, createTimeline } from "animejs";
-  import { isMainCursorVisible, isWritingTerminalAnimationFinished } from "../store";
-
+  import {
+    isMainCursorVisible,
+    isWritingTerminalAnimationFinished,
+  } from "../store";
 
   const unsubscribe = isWritingTerminalAnimationFinished.subscribe((value) => {
     if (value) {

@@ -146,12 +146,12 @@ const { terminalPath, isSearchable = false } = Astro.props;
     }
   }
 
-  const cursor = document.getElementById("prompt-cursor");
-  if (cursor) {
-    isMainCursorVisible.subscribe((visible) =>
-      switchCursorVisibility(cursor, visible),
-    );
-  }
+  isMainCursorVisible.subscribe(visible => {
+    const cursor = document.getElementById("prompt-cursor");
+    if (cursor) {
+        switchCursorVisibility(cursor, visible)}
+    }
+  );
 
   document.addEventListener("astro:after-swap", () => {
     const cursor = document.getElementById("prompt-cursor");
@@ -331,7 +331,6 @@ const { terminalPath, isSearchable = false } = Astro.props;
 
   .terminal-cursor.is-visible {
     animation: blink 1s steps(1, end) infinite;
-    opacity: 0;
   }
 
   @keyframes blink {

@@ -62,7 +62,7 @@ const posts = (await getCollection("blog"))
       const t1 = createTimeline();
 
       targets.forEach((target) => {
-        const { chars } = splitText(target, { words: false, chars: true });
+        const { chars } = splitText(target, { words: true, chars: true });
         chars.forEach((char) => (char.style.opacity = "0"));
 
         t1.add(chars, {

@@ -50,50 +50,74 @@ html[data-theme="light"] {
 
 html {
   background: var(--bg);
+  font-size: 15px; 
+  line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background: var(--bg);
   color: var(--text-light);
+  font-size: 1rem; /* 15px */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 24px 0;
-  font-family: var(--font-mona);
-  font-size: 13px;
-}
-
-table thead {
-  border-bottom: 2px solid var(--border-color);
-}
-
-table thead th {
-  text-align: left;
-  padding: 12px 8px;
-  color: var(--accent-color);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-table tbody td {
-  padding: 12px 8px;
-  border-bottom: 1px solid var(--table-border);
+h1, h2, h3, h4, h5, h6 {
   color: var(--text-light);
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
-table tbody tr:hover {
-  background-color: var(--table-hover);
+h1 {
+  font-size: 1.6rem; /* 24px - Main Page title rules */
+}
+
+h2 {
+  font-size: 1.33rem; /* 20px - Main section headings */
+  padding-bottom: 8px;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.066rem; /* 16px - Titles */
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+h4, h5, h6 {
+  font-size: 1rem; /* 15px - Subheadings */
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+p.description,
+p.post-desc,
+.text-muted-compact {
+  font-size: 0.866rem; /* 13px */
+  color: var(--text-muted);
+}
+
+small,
+.meta,
+.search-empty-error {
+  font-size: 0.8rem; /* 12px */
+  font-family: var(--font-mona);
+  color: var(--text-muted);
 }
 
 a {
   color: var(--link-text);
   text-decoration: none;
   border-bottom: 1px dotted var(--link-text);
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 a:hover {
@@ -102,8 +126,8 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-  table {
-    font-size: 11px;
+  html {
+    font-size: 14px;
   }
 }
 

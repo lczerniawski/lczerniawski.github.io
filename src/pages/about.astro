@@ -2,138 +2,136 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title=`About` description="Łukasz Czerniawski - Solution Architect">
-  <h2>Łukasz Czerniawski</h2>
-  <p>
-    Solution Architect at AXA focused on security, .NET engineering, Python and
-    applied AI.
-  </p>
+<Layout title="About" description="Łukasz Czerniawski - Solution Architect">
+  <section class="profile-section">
+    <h2 class="name">Łukasz Czerniawski</h2>
+    <p>
+      Solution Architect at AXA focused on security, .NET engineering, Python
+      and applied AI.
+    </p>
+  </section>
 
-  <h2>Experience</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Role</th>
-        <th>Company</th>
-        <th>Period</th>
-        <th>Location</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Solution Architect</td>
-        <td>AXA IT Solutions</td>
-        <td>Jan 2026 - Present</td>
-        <td>Warsaw, Poland</td>
-      </tr>
-      <tr>
-        <td>Junior Architect</td>
-        <td>AXA IT Solutions</td>
-        <td>Jan 2024 - Dec 2025</td>
-        <td>Warsaw, Poland</td>
-      </tr>
-      <tr>
-        <td>.NET Developer</td>
-        <td>AXA IT Solutions</td>
-        <td>Jul 2022 - Dec 2023</td>
-        <td>Warsaw, Poland</td>
-      </tr>
-      <tr>
-        <td>Junior .NET Developer</td>
-        <td>AXA IT Solutions</td>
-        <td>May 2021 - Jul 2022</td>
-        <td>Warsaw, Poland</td>
-      </tr>
-      <tr>
-        <td>Trainee .NET Developer</td>
-        <td>AXA IT Solutions</td>
-        <td>Dec 2020 - Apr 2021</td>
-        <td>Warsaw, Poland</td>
-      </tr>
-    </tbody>
-  </table>
+  <section class="cv-section">
+    <h2>Experience</h2>
+    <div class="experience-list">
+      <div class="experience-item">
+        <h3>Solution Architect</h3>
+        <p class="company">AXA IT Solutions</p>
+        <p class="meta">Jan 2026 - Present | Warsaw, Poland</p>
+        <hr class="separator" />
+      </div>
 
-  <h2>Education</h2>
-  <ul>
-    <li>
-      MSc in Artificial Intelligence, University of Liverpool, 2023 - 2026
-    </li>
-    <li>BSc in Computer Science, WIT Academy, 2016 - 2020</li>
-  </ul>
+      <div class="experience-item">
+        <h3>Junior Architect</h3>
+        <p class="company">AXA IT Solutions</p>
+        <p class="meta">Jan 2024 - Dec 2025 | Warsaw, Poland</p>
+        <hr class="separator" />
+      </div>
 
-  <h2>Certifications</h2>
-  <ul>
-    <li>
-      <a
-        href="https://www.credly.com/badges/663816d8-7088-438b-bcd3-08e4c183d881/public_url"
-        >TOGAF Enterprise Architecture Practitioner</a
-      >
-    </li>
-    <li>
-      <a
-        href="https://www.credly.com/badges/c604e462-8287-49a8-88df-ad07d41c5da5/public_url"
-        >TOGAF Enterprise Architecture Foundation</a
-      >
-    </li>
-    <li>
-      <a
-        href="https://learn.microsoft.com/en-gb/users/czerniawski-lukasz/credentials/6fd1278d796dbd72"
-        >Azure Fundamentals</a
-      >
-    </li>
-    <li>
-      <a
-        href="https://learn.microsoft.com/en-gb/users/czerniawski-lukasz/credentials/35707c2a0c4d046c"
-        >Azure Data Fundamentals</a
-      >
-    </li>
-    <li>
-      <a
-        href="https://learn.microsoft.com/en-gb/users/czerniawski-lukasz/credentials/221f77f65a806101"
-        >Azure AI Fundamentals</a
-      >
-    </li>
-    <li>
-      <a
-        href="https://www.credly.com/badges/6a100c68-6c28-4180-9580-cfa2e34aaf18/public_url"
-        >FiNOS Financial Services Open Source Developer</a
-      >
-    </li>
-  </ul>
+      <div class="experience-item">
+        <h3>.NET Developer</h3>
+        <p class="company">AXA IT Solutions</p>
+        <p class="meta">Jul 2022 - Dec 2023 | Warsaw, Poland</p>
+        <hr class="separator" />
+      </div>
 
-  <h2>Open Source Projects</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Project</th>
-        <th>Summary</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>UUID</td>
-        <td
-          >A high-performance Mojo library for generating, parsing, validating,
-          and formatting UUID values in RFC-9562 compatible string forms.
-          <br />
-          Links: <a href="https://github.com/lczerniawski/uuid">Repo</a></td
+      <div class="experience-item">
+        <h3>Junior .NET Developer</h3>
+        <p class="company">AXA IT Solutions</p>
+        <p class="meta">May 2021 - Jul 2022 | Warsaw, Poland</p>
+        <hr class="separator" />
+      </div>
+
+      <div class="experience-item">
+        <h3>Trainee .NET Developer</h3>
+        <p class="company">AXA IT Solutions</p>
+        <p class="meta">Dec 2020 - Apr 2021 | Warsaw, Poland</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cv-section">
+    <h2>Education</h2>
+    <ul class="education-list">
+      <li>
+        MSc in Artificial Intelligence, University of Liverpool, 2023 - 2026
+      </li>
+      <li>BSc in Computer Science, WIT Academy, 2016 - 2020</li>
+    </ul>
+  </section>
+
+  <section class="cv-section">
+    <h2>Certifications</h2>
+    <ul class="certifications-list">
+      <li>
+        <a
+          href="https://www.credly.com/badges/663816d8-7088-438b-bcd3-08e4c183d881/public_url"
+          >TOGAF Enterprise Architecture Practitioner</a
         >
-        <td></td>
-      </tr>
-      <tr>
-        <td>Crypto</td>
-        <td
-          >A Mojo cryptography library intended to cover the commonly used
+      </li>
+      <li>
+        <a
+          href="https://www.credly.com/badges/c604e462-8287-49a8-88df-ad07d41c5da5/public_url"
+          >TOGAF Enterprise Architecture Foundation</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://learn.microsoft.com/en-gb/users/czerniawski-lukasz/credentials/6fd1278d796dbd72"
+          >Azure Fundamentals</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://learn.microsoft.com/en-gb/users/czerniawski-lukasz/credentials/35707c2a0c4d046c"
+          >Azure Data Fundamentals</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://learn.microsoft.com/en-gb/users/czerniawski-lukasz/credentials/221f77f65a806101"
+          >Azure AI Fundamentals</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.credly.com/badges/6a100c68-6c28-4180-9580-cfa2e34aaf18/public_url"
+          >FiNOS Financial Services Open Source Developer</a
+        >
+      </li>
+    </ul>
+  </section>
+
+  <section class="cv-section">
+    <h2>Open Source Projects</h2>
+    <div class="projects-list">
+      <div class="project-item">
+        <h3>UUID</h3>
+        <p>
+          A high-performance Mojo library for generating, parsing, validating,
+          and formatting UUID values in RFC-9562 compatible string forms.
+          <br /><br />
+          Links: <a href="https://github.com/lczerniawski/uuid">Repo</a>
+        </p>
+        <hr class="separator" />
+      </div>
+
+      <div class="project-item">
+        <h3>Crypto</h3>
+        <p>
+          A Mojo cryptography library intended to cover the commonly used
           cryptographic algorithms.
-          <br />
+          <br /><br />
           Links: <a href="https://github.com/lczerniawski/crypto">Repo</a>
-        </td>
-      </tr>
-      <tr>
-        <td>Obsidian Sunset VSCode Theme</td>
-        <td
-          >A dark, colorful theme for Visual Studio Code.
-          <br />
+        </p>
+        <hr class="separator" />
+      </div>
+
+      <div class="project-item">
+        <h3>Obsidian Sunset VSCode Theme</h3>
+        <p>
+          A dark, colorful theme for Visual Studio Code.
+          <br /><br />
           Links: <a href="https://github.com/lczerniawski/ObsidianSunset"
             >Repo</a
           >,
@@ -141,99 +139,182 @@ import Layout from "../layouts/Layout.astro";
             href="https://marketplace.visualstudio.com/items?itemName=lczerniawski.obsidiansunset"
             >Marketplace</a
           >
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Git Unused Branch Cleaner</td>
-        <td
-          >Helps identify and clean up unused or outdated Git branches.
-          <br />
+        </p>
+        <hr class="separator" />
+      </div>
+
+      <div class="project-item">
+        <h3>Git Unused Branch Cleaner</h3>
+        <p>
+          Helps identify and clean up unused or outdated Git branches.
+          <br /><br />
           Links: <a
             href="https://github.com/lczerniawski/Git-Unused-Branch-Cleaner-VSCode"
             >Repo</a
-          >, <a
+          >,
+          <a
             href="https://marketplace.visualstudio.com/items?itemName=lczerniawski.git-unused-branch-cleaner"
             >Marketplace</a
           >
-        </td>
-        <tr>
-          <td>Unused CSS Finder</td>
-          <td
-            >Finds unused CSS classes and surfaces them in the editor.
-            <br />
-            Links: <a href="https://github.com/lczerniawski/Unused-CSS-Finder"
-              >Repo</a
-            >, <a
-              href="https://marketplace.visualstudio.com/items?itemName=lczerniawski.unused-css-finder"
-              >Marketplace</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>Angular File Toggle</td>
-          <td
-            >Quickly switch between Angular file types. <br />
-            Links: <a href="https://github.com/lczerniawski/Angular-File-Toggle"
-              >Repo</a
-            >, <a
-              href="https://marketplace.visualstudio.com/items?itemName=lczerniawski.angular-file-toggle"
-              >Marketplace</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>Obsidian Sunset JetBrains Theme</td>
-          <td
-            >Theme for JetBrains IDEs. <br /> Links: <a
-              href="https://github.com/lczerniawski/ObsidianSunset-JetBrains"
-              >Repo</a
-            >, <a
-              href="https://plugins.jetbrains.com/plugin/23938-obsidian-sunset-theme"
-              >Marketplace</a
-            ></td
+        </p>
+        <hr class="separator" />
+      </div>
+
+      <div class="project-item">
+        <h3>Unused CSS Finder</h3>
+        <p>
+          Finds unused CSS classes and surfaces them in the editor.
+          <br /><br />
+          Links: <a href="https://github.com/lczerniawski/Unused-CSS-Finder"
+            >Repo</a
+          >,
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=lczerniawski.unused-css-finder"
+            >Marketplace</a
           >
-        </tr>
-        <tr>
-          <td>Better Comments JetBrains Plugin</td>
-          <td
-            >Improves comment clarity in JetBrains IDEs. <br /> Links: <a
-              href="https://github.com/lczerniawski/BetterComments-JetBrains"
-              >Repo</a
-            >, <a
-              href="https://plugins.jetbrains.com/plugin/25738-better-comments"
-              >Marketplace</a
-            ></td
+        </p>
+        <hr class="separator" />
+      </div>
+
+      <div class="project-item">
+        <h3>Angular File Toggle</h3>
+        <p>
+          Quickly switch between Angular file types.
+          <br /><br />
+          Links: <a href="https://github.com/lczerniawski/Angular-File-Toggle"
+            >Repo</a
+          >,
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=lczerniawski.angular-file-toggle"
+            >Marketplace</a
           >
-        </tr>
-        <tr>
-          <td>Obsidian Sunset Zed Theme</td>
-          <td
-            >Theme for Zed editor. <br /> Links: <a
-              href="https://github.com/lczerniawski/ObsidianSunset-Zed">Repo</a
-            >, <a href="https://zed.dev/extensions?query=Obsidian+Sunset+Theme"
-              >Extensions</a
-            ></td
+        </p>
+        <hr class="separator" />
+      </div>
+
+      <div class="project-item">
+        <h3>Obsidian Sunset JetBrains Theme</h3>
+        <p>
+          Theme for JetBrains IDEs.
+          <br /><br />
+          Links: <a
+            href="https://github.com/lczerniawski/ObsidianSunset-JetBrains"
+            >Repo</a
+          >,
+          <a
+            href="https://plugins.jetbrains.com/plugin/23938-obsidian-sunset-theme"
+            >Marketplace</a
           >
-        </tr>
-        <tr>
-          <td>LOPEX</td>
-          <td
-            >Command-line tool for extracting leftover files from source control
-            leaks.
-            <br />
-            Links: <a href="https://github.com/lczerniawski/LOPEX">Repo</a></td
+        </p>
+        <hr class="separator" />
+      </div>
+
+      <div class="project-item">
+        <h3>Better Comments JetBrains Plugin</h3>
+        <p>
+          Improves comment clarity in JetBrains IDEs.
+          <br /><br />
+          Links: <a
+            href="https://github.com/lczerniawski/BetterComments-JetBrains"
+            >Repo</a
+          >,
+          <a href="https://plugins.jetbrains.com/plugin/25738-better-comments"
+            >Marketplace</a
           >
-        </tr>
-        <tr>
-          <td>Reson</td>
-          <td
-            >Terminal-based system monitor written in Rust.
-            <br />
-            Links: <a href="https://github.com/lczerniawski/reson">Repo</a></td
+        </p>
+        <hr class="separator" />
+      </div>
+
+      <div class="project-item">
+        <h3>Obsidian Sunset Zed Theme</h3>
+        <p>
+          Theme for Zed editor.
+          <br /><br />
+          Links: <a href="https://github.com/lczerniawski/ObsidianSunset-Zed"
+            >Repo</a
+          >,
+          <a href="https://zed.dev/extensions?query=Obsidian+Sunset+Theme"
+            >Extensions</a
           >
-        </tr>
-      </tr>
-    </tbody>
-  </table>
+        </p>
+        <hr class="separator" />
+      </div>
+
+      <div class="project-item">
+        <h3>LOPEX</h3>
+        <p>
+          Command-line tool for extracting leftover files from source control
+          leaks.
+          <br /><br />
+          Links: <a href="https://github.com/lczerniawski/LOPEX">Repo</a>
+        </p>
+        <hr class="separator" />
+      </div>
+
+      <div class="project-item">
+        <h3>Reson</h3>
+        <p>
+          Terminal-based system monitor written in Rust.
+          <br /><br />
+          Links: <a href="https://github.com/lczerniawski/reson">Repo</a>
+        </p>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .name {
+    margin-bottom: 0px;
+  }
+
+  .experience-item h3,
+  .project-item h3 {
+    color: var(--accent-color);
+  }
+
+  .experience-item .company {
+    font-weight: 600;
+  }
+
+  .experience-item .meta {
+    font-size: 13px;
+  }
+
+  .cv-section {
+    margin-top: 35px;
+  }
+
+  li {
+    padding-bottom: 5px;
+  }
+
+  .separator {
+    border: none;
+    border-bottom: 1px solid var(--table-border);
+    margin: 10px 0;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 24px 0;
+  }
+
+  ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    color: var(--text-light);
+  }
+
+  ul li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 7px;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-color);
+  }
+</style>

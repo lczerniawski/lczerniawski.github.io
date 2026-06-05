@@ -83,8 +83,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.066rem; /* 16px - Titles */
-  color: var(--accent-color);
+  font-size: 1.133rem; /* 17px - Titles */
   margin-bottom: 0.5rem;
 }
 
@@ -96,21 +95,6 @@ h4, h5, h6 {
 p {
   margin-top: 0;
   margin-bottom: 1rem;
-}
-
-p.description,
-p.post-desc,
-.text-muted-compact {
-  font-size: 0.866rem; /* 13px */
-  color: var(--text-muted);
-}
-
-small,
-.meta,
-.search-empty-error {
-  font-size: 0.8rem; /* 12px */
-  font-family: var(--font-mona);
-  color: var(--text-muted);
 }
 
 a {

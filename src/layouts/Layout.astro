@@ -183,6 +183,7 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined;
     <ClientRouter />
   </head>
   <body>
+    <a class="skip-link" href="#content">Skip to content</a>
     <Navigation />
     <BackToTop />
     <div class="drafting-frame">
@@ -195,7 +196,9 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined;
         <div class="terminal-title">{terminalPath}</div>
       </div>
       <TerminalBody terminalPath={terminalPath} isSearchable={isSearchable}>
-        <slot />
+        <div id="content" tabindex="-1">
+          <slot />
+        </div>
       </TerminalBody>
     </div>
   </body>
@@ -216,6 +219,24 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined;
     transition:
       background-color 0.3s ease,
       color 0.3s ease;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -48px;
+    left: 20px;
+    z-index: 1000;
+    padding: 8px 12px;
+    background: var(--bg);
+    color: var(--text-light);
+    border: 1px solid var(--accent-color);
+    text-decoration: none;
+    transition: top 0.2s ease;
+  }
+
+  .skip-link:focus,
+  .skip-link:focus-visible {
+    top: 20px;
   }
 
   .drafting-frame {

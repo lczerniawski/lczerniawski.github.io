@@ -2,13 +2,76 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { SITE_DESCRIPTION } from "../consts";
+import {
+  absoluteUrl,
+  pageNodeId,
+  siteNodeId,
+  siteRootUrl,
+  type JsonLdNode,
+} from "../lib/jsonld";
 
 const posts = (await getCollection("blog"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 4);
+const siteUrl = Astro.site!;
+const websiteId = siteNodeId(siteUrl, "#website");
+const personId = siteNodeId(siteUrl, "#person");
+
+const structuredData: JsonLdNode[] = [
+  {
+    "@type": "WebSite",
+    "@id": websiteId,
+    url: siteRootUrl(siteUrl),
+    name: "lczerniawski",
+    alternateName: ["Łukasz Czerniawski", "lczerniawski.github.io"],
+    description: SITE_DESCRIPTION,
+    inLanguage: "en-GB",
+    image: {
+      "@type": "ImageObject",
+      "@id": siteNodeId(siteUrl, "#website-image"),
+      url: absoluteUrl(siteUrl, "/favicon.svg"),
+      caption: "lczerniawski site mark",
+    },
+    publisher: {
+      "@id": personId,
+    },
+  },
+  {
+    "@type": "Person",
+    "@id": personId,
+    url: siteRootUrl(siteUrl),
+    name: "Łukasz Czerniawski",
+    alternateName: "lczerniawski",
+    givenName: "Łukasz",
+    familyName: "Czerniawski",
+    jobTitle: "Solution Architect",
+    description:
+      "Solution Architect at AXA focused on security, .NET engineering, Python and applied AI.",
+    knowsLanguage: "en-GB",
+    image: {
+      "@type": "ImageObject",
+      "@id": siteNodeId(siteUrl, "#person-image"),
+      url: absoluteUrl(siteUrl, "/lukasz_czerniawski_photo.jpg"),
+      caption: "Łukasz Czerniawski",
+    },
+    sameAs: [
+      "https://github.com/lczerniawski",
+      "https://www.linkedin.com/in/lczerniawski",
+    ],
+  },
+];
 ---
 
-<Layout title=`Home` description={SITE_DESCRIPTION}>
+<Layout
+  title="Home"
+  description={SITE_DESCRIPTION}
+  jsonLd={structuredData}
+  ogType="profile"
+  ogImage="/lukasz_czerniawski_photo.jpg"
+  profileFirstName="Łukasz"
+  profileLastName="Czerniawski"
+  profileUsername="lczerniawski"
+>
   <main>
     <div id="cursor"></div>
     <h2 class="typed" data-cursor="big">Welcome</h2>

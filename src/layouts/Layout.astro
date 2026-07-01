@@ -11,12 +11,41 @@ interface Props {
   title: string;
   description: string;
   isSearchable?: boolean;
+  jsonLd?: JsonLdNode[];
+  ogType?: "website" | "profile" | "article";
+  ogImage?: string;
+  ogImageAlt?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  profileFirstName?: string;
+  profileLastName?: string;
+  profileUsername?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
+type JsonLdNode = Record<string, unknown>;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, isSearchable = false } = Astro.props;
+const {
+  title,
+  description,
+  isSearchable = false,
+  jsonLd = [],
+  ogType = "website",
+  ogImage,
+  ogImageAlt = title,
+  ogImageWidth,
+  ogImageHeight,
+  profileFirstName,
+  profileLastName,
+  profileUsername,
+  publishedTime,
+  modifiedTime,
+} = Astro.props;
 const terminalPath = `~${Astro.url.pathname}`;
 const finalTitle = `${SITE_TITLE} - ${title}`;
+const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined;
 ---
 
 <html lang="en">
@@ -90,6 +119,66 @@ const finalTitle = `${SITE_TITLE} - ${title}`;
     <title>{finalTitle}</title>
     <meta name="title" content={finalTitle} />
     <meta name="description" content={description} />
+
+    <!-- Open Graph / Social Cards -->
+    <meta property="og:title" content={finalTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE_TITLE} />
+    <meta property="og:locale" content="en_GB" />
+    {
+      ogImageUrl && (
+        <>
+          <meta property="og:image" content={ogImageUrl} />
+          <meta property="og:image:alt" content={ogImageAlt} />
+          {ogImageWidth && (
+            <meta property="og:image:width" content={ogImageWidth.toString()} />
+          )}
+          {ogImageHeight && (
+            <meta property="og:image:height" content={ogImageHeight.toString()} />
+          )}
+        </>
+      )
+    }
+    {ogType === "article" && publishedTime && (
+      <meta property="article:published_time" content={publishedTime} />
+    )}
+    {ogType === "article" && modifiedTime && (
+      <meta property="article:modified_time" content={modifiedTime} />
+    )}
+    {ogType === "profile" && profileFirstName && (
+      <meta property="profile:first_name" content={profileFirstName} />
+    )}
+    {ogType === "profile" && profileLastName && (
+      <meta property="profile:last_name" content={profileLastName} />
+    )}
+    {ogType === "profile" && profileUsername && (
+      <meta property="profile:username" content={profileUsername} />
+    )}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={finalTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+    {ogImageUrl && <meta name="twitter:image:alt" content={ogImageAlt} />}
+
+    {
+      jsonLd.length > 0 && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(
+            {
+              "@context": "https://schema.org",
+              "@graph": jsonLd,
+            },
+            null,
+            2,
+          )}
+        />
+      )
+    }
 
     <ClientRouter />
   </head>

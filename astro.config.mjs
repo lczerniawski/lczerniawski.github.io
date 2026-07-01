@@ -9,12 +9,12 @@ export default defineConfig({
   site: "https://lczerniawski.github.io",
   integrations: [mdx(), sitemap()],
   prefetch: {
-    prefetchAll: true
+    prefetchAll: true,
   },
   vite: {
     build: {
-      minify: "esbuild"
-    }
+      minify: "esbuild",
+    },
   },
   fonts: [
     {

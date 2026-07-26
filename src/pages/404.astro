@@ -1,0 +1,106 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { siteNodeId, siteRootUrl, type JsonLdNode } from "../lib/jsonld";
+
+const siteUrl = Astro.site!;
+const websiteId = siteNodeId(siteUrl, "#website");
+const personId = siteNodeId(siteUrl, "#person");
+
+const structuredData: JsonLdNode[] = [
+  {
+    "@type": "WebSite",
+    "@id": websiteId,
+    url: siteRootUrl(siteUrl),
+    name: "lczerniawski",
+    publisher: {
+      "@id": personId,
+    },
+  },
+];
+
+Astro.response.status = 404;
+---
+
+<Layout
+  title="404 - Page Not Found"
+  description="The page you're looking for doesn't exist."
+  jsonLd={structuredData}
+>
+  <main class="error-container">
+    <div class="error-content">
+      <div class="error-code">404</div>
+      <h1 class="error-title">Page Not Found</h1>
+      <p class="error-message">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .error-content {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .error-code {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin: 0;
+    line-height: 1;
+    font-family: var(--font-mona);
+    letter-spacing: -0.02em;
+    opacity: 0.8;
+  }
+
+  .error-title {
+    font-size: 1.8rem;
+    margin: 16px 0 12px 0;
+    color: var(--text-light);
+  }
+
+  .error-message {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .error-code {
+      font-size: 3.5rem;
+    }
+
+    .error-title {
+      font-size: 1.5rem;
+    }
+
+    .error-message {
+      font-size: 0.95rem;
+    }
+
+    .suggestions {
+      padding: 16px;
+    }
+
+    .link-list {
+      gap: 8px;
+    }
+
+    .link-list a {
+      font-size: 0.95rem;
+      padding: 6px 10px;
+    }
+  }
+</style>

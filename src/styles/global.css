@@ -24,6 +24,7 @@ html[data-theme="dark"] {
   --accent-hover: #9999ff;
   --code-bg: rgba(0, 0, 0, 0.4);
   --code-text: #a8e6cf;
+  --code-block-bg: #222222;
   --table-border: #222;
   --table-hover: rgba(124, 126, 255, 0.05);
   --link-text: #7c7eff;
@@ -49,6 +50,7 @@ html[data-theme="light"] {
   --accent-hover: #3d38cc;
   --code-bg: rgba(79, 70, 229, 0.1);
   --code-text: #0d47a1;
+  --code-block-bg: #fafaf9;
   --table-border: #d0d0d0;
   --table-hover: rgba(79, 70, 229, 0.08);
   --link-text: #4f46e5;
@@ -152,6 +154,7 @@ a:hover {
   html {
     font-size: 14px;
   }
+
 }
 
 a:focus-visible,
@@ -192,15 +195,36 @@ html {
 }
 
 /* Code block positioning for copy button */
-pre {
+pre:not(.mermaid) {
   position: relative;
+  margin: 16px 0;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+pre:not(.mermaid):hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 1px var(--accent-color) inset,
+    0 4px 12px var(--frame-shadow-3);
+}
+
+pre:not(.mermaid) code {
+  display: block;
+  overflow: auto;
+  padding: 16px;
+  padding-right: 60px;
+  line-height: 1.5;
+  background-color: var(--code-block-bg);
 }
 
 /* Copy button styling */
 .copy-button {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 12px;
+  right: 12px;
   padding: 6px 12px;
   background-color: var(--accent-color);
   color: #fff;
@@ -212,14 +236,18 @@ pre {
   font-weight: 500;
   transition:
     background-color var(--dur-fast) var(--ease-out),
-    transform var(--dur-fast) var(--ease-out);
-  opacity: 0.7;
+    transform var(--dur-fast) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
+  opacity: 0;
   z-index: 10;
+}
+
+pre:hover .copy-button {
+  opacity: 1;
 }
 
 .copy-button:hover {
   background-color: var(--accent-hover);
-  opacity: 1;
 }
 
 .copy-button:active {
@@ -230,16 +258,23 @@ pre {
   background-color: #22c55e;
 }
 
-pre:hover .copy-button {
-  opacity: 1;
-}
-
 /* Shiki dark mode theme */
 html[data-theme="dark"] .astro-code,
 html[data-theme="dark"] .astro-code span {
   color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
+  background-color: transparent !important;
   font-style: var(--shiki-dark-font-style) !important;
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+code,
+pre {
+  font-size: 0.8rem; /* scales down from default 1rem */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }

@@ -3,11 +3,29 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, fontProviders } from "astro/config";
+import mermaid from "astro-mermaid";
+
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://lczerniawski.github.io",
-  integrations: [mdx(), sitemap()],
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+    },
+    syntaxHighlight: 'shiki',
+  },
+  integrations: [
+    mdx(),
+    sitemap(),
+    mermaid({
+      theme: "neutral",
+      autoTheme: true,
+    }),
+  ],
   prefetch: {
     prefetchAll: true,
   },
@@ -18,26 +36,16 @@ export default defineConfig({
   },
   fonts: [
     {
-      provider: fontProviders.local(),
-      name: "Monaspace Neon",
-      cssVariable: "--font-mona",
+      provider: fontProviders.google(),
+      name: "IBM Plex Mono",
+      cssVariable: "--font-ibm-mono",
       fallbacks: ["monospace"],
-      options: {
-        variants: [
-          {
-            src: ["./src/assets/fonts/MonaspaceNeon-Regular.otf"],
-            weight: 400,
-            style: "normal",
-            display: "swap",
-          },
-          {
-            src: ["./src/assets/fonts/MonaspaceNeon-Bold.otf"],
-            weight: 700,
-            style: "normal",
-            display: "swap",
-          },
-        ],
-      },
+    },
+    {
+      provider: fontProviders.google(),
+      name: "IBM Plex Sans",
+      cssVariable: "--font-ibm-sans",
+      fallbacks: ["sans-serif"],
     },
   ],
 });

@@ -13,7 +13,8 @@ import {
 
 type Props = CollectionEntry<"blog">["data"] & { slug: string };
 
-const { title, description, pubDate, updatedDate, heroImage, slug } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, slug } =
+  Astro.props;
 const siteUrl = Astro.site!;
 const pagePath = `/blog/${slug}/`;
 const pageUrl = absoluteUrl(siteUrl, pagePath);
@@ -207,6 +208,10 @@ const structuredData: JsonLdNode[] = [
   .prose {
     color: var(--text-light);
     line-height: 1.8;
+    max-width: 70ch;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    font-family: "IBM Plex Sans", sans-serif;
   }
 
   .blog-meta {

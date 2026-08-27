@@ -128,10 +128,11 @@ const structuredData: JsonLdNode[] = [
           <a href={`/blog/${post.id}/`}>
             {post.data.heroImage && (
               <Image
-                width={510}
-                height={255}
+                width={810}
+                height={455}
+                quality="high"
                 src={post.data.heroImage}
-                alt="Hero image"
+                alt="Hero"
               />
             )}
             <h3>{post.data.title}</h3>
@@ -236,6 +237,6 @@ const structuredData: JsonLdNode[] = [
   .search-empty-error {
     color: var(--dot-orange, #ff5f56);
     font-size: 12px;
-    font-family: var(--font-mona);
+    font-family: var(--font-ibm-mono);
   }
 </style>

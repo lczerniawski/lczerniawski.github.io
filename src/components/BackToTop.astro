@@ -11,7 +11,7 @@
     background: transparent;
     border: 1px solid var(--accent-color);
     color: var(--accent-color);
-    font-family: var(--font-mona);
+    font-family: var(--font-ibm-mono);
     font-size: 13px;
     cursor: pointer;
     opacity: 0;
@@ -34,7 +34,7 @@
 
   @media (max-width: 1100px) {
     .text {
-        display: none;
+      display: none;
     }
     .terminal-button {
       font-size: 20px;
@@ -61,5 +61,5 @@
   }
 
   setupBackToTopButton();
-  document.addEventListener("astro:page-load", setupBackToTopButton)
+  document.addEventListener("astro:page-load", setupBackToTopButton);
 </script>

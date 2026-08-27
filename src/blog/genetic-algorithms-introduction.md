@@ -367,4 +367,4 @@ Optimal solution found in generation 16!
 
 # Conclusions
 
-To conclude in this article I presented a concept of Genetic Algorithms that are part of large family of machine learning algorithms. They offer a powerful and flexible approach, that can be utilized in various optimization, search, and combinatorics problems.
+To conclude, in this article I presented a concept of genetic algorithms that are part of large family of machine learning algorithms. They offer a powerful and flexible approach, that can be utilized in various optimization, search, and combinatorics problems.
